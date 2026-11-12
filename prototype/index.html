@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>法訊雷達｜個人化首頁原型</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 0; min-width: 320px; background: light-dark(#eaf0ec, #111613); }
+    i[data-lucide] { display: inline-flex; align-items: center; justify-content: center; font-style: normal; }
+    i[data-lucide="scale"]::before { content: "§"; }
+    i[data-lucide="bell"]::before { content: "♧"; }
+    i[data-lucide="house"]::before { content: "⌂"; }
+    i[data-lucide="landmark"]::before { content: "▤"; }
+    i[data-lucide="messages-square"]::before { content: "☷"; }
+    i[data-lucide="bookmark"]::before { content: "▮"; }
+    i[data-lucide="rotate-cw"]::before { content: "↻"; }
+    i[data-lucide="message-circle"]::before { content: "●"; }
+    i[data-lucide="sparkles"]::before { content: "✦"; }
+    i[data-lucide="tags"]::before { content: "⌗"; }
+    i[data-lucide="clock-3"]::before { content: "◷"; }
+    i[data-lucide="thumbs-up"]::before { content: "↑"; }
+    i[data-lucide="calendar-days"]::before { content: "▦"; }
+  </style>
+</head>
+<body>
+<div id="law-feed-web-demo" class="viz-dotted-background" aria-label="法訊雷達網頁首頁示意">
+  <style>
+    #law-feed-web-demo {
+      color-scheme: light dark;
+      --lf-bg: light-dark(#f4f7f5, #151a18);
+      --lf-surface: light-dark(#ffffff, #202724);
+      --lf-text: light-dark(#18211d, #edf3ef);
+      --lf-muted: light-dark(#65736b, #a5b2aa);
+      --lf-line: light-dark(#e2e9e4, #35413a);
+      --lf-accent: light-dark(#216b4b, #87d2a9);
+      --lf-accent-soft: light-dark(#e6f3eb, #263d31);
+      --lf-warm: light-dark(#fff3df, #473824);
+      --lf-warm-text: light-dark(#775019, #f2cf91);
+      box-sizing: border-box;
+      padding: 18px 12px;
+      color: var(--lf-text);
+      font-family: Inter, "Noto Sans TC", system-ui, sans-serif;
+    }
+    #law-feed-web-demo *, #law-feed-web-demo *::before, #law-feed-web-demo *::after { box-sizing: border-box; }
+    #law-feed-web-demo .app-shell {
+      width: min(100%, 1220px);
+      min-height: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 218px minmax(0, 1fr) 258px;
+      grid-template-rows: 68px 1fr;
+      overflow: hidden;
+      border: 1px solid var(--lf-line);
+      border-radius: 22px;
+      background: var(--lf-bg);
+      box-shadow: 0 18px 48px light-dark(#26382e20, #00000050);
+    }
+    #law-feed-web-demo .topbar {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--lf-line);
+      background: var(--lf-surface);
+    }
+    #law-feed-web-demo .brand { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; white-space: nowrap; }
+    #law-feed-web-demo .brand-mark {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border-radius: 11px; background: var(--lf-accent); color: light-dark(#fff, #12271b);
+    }
+    #law-feed-web-demo .brand-mark i { width: 19px; height: 19px; }
+    #law-feed-web-demo .topbar-right { display: flex; align-items: center; gap: 12px; }
+    #law-feed-web-demo .account-chip {
+      display: flex; align-items: center; gap: 9px; padding: 6px 10px 6px 6px;
+      border: 1px solid var(--lf-line); border-radius: 999px; background: var(--lf-surface);
+      font-size: 12px; white-space: nowrap;
+    }
+    #law-feed-web-demo .avatar {
+      width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%;
+      background: var(--lf-accent-soft); color: var(--lf-accent); font-size: 11px; font-weight: 600;
+    }
+    #law-feed-web-demo .icon-btn {
+      min-width: 38px; min-height: 38px; display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--lf-line); border-radius: 12px; background: var(--lf-surface); color: var(--lf-text);
+    }
+    #law-feed-web-demo .icon-btn i { width: 17px; height: 17px; }
+    #law-feed-web-demo .sidebar { grid-column: 1; grid-row: 2; padding: 23px 14px; border-right: 1px solid var(--lf-line); background: var(--lf-surface); }
+    #law-feed-web-demo .side-label { margin: 0 11px 10px; color: var(--lf-muted); font-size: 10px; letter-spacing: .08em; }
+    #law-feed-web-demo .side-nav { display: grid; gap: 4px; }
+    #law-feed-web-demo .nav-item {
+      min-height: 42px; display: flex; align-items: center; gap: 11px; padding: 0 11px;
+      border-radius: 11px; color: var(--lf-muted); font-size: 13px;
+    }
+    #law-feed-web-demo .nav-item i { width: 17px; height: 17px; }
+    #law-feed-web-demo .nav-item.active { background: var(--lf-accent-soft); color: var(--lf-accent); font-weight: 600; }
+    #law-feed-web-demo .side-divider { height: 1px; margin: 19px 8px; background: var(--lf-line); }
+    #law-feed-web-demo .side-topics { display: grid; gap: 3px; }
+    #law-feed-web-demo .topic-link { display: flex; align-items: center; gap: 9px; padding: 9px 11px; color: var(--lf-text); font-size: 12px; }
+    #law-feed-web-demo .topic-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lf-accent); }
+    #law-feed-web-demo .feed { grid-column: 2; grid-row: 2; min-width: 0; padding: 28px 27px 30px; }
+    #law-feed-web-demo .eyebrow { margin: 0 0 6px; color: var(--lf-accent); font-size: 11px; font-weight: 600; letter-spacing: .03em; }
+    #law-feed-web-demo h1 { margin: 0; font-size: 24px; line-height: 1.4; letter-spacing: -.02em; }
+    #law-feed-web-demo .subtitle { margin: 5px 0 15px; color: var(--lf-muted); font-size: 13px; line-height: 1.6; }
+    #law-feed-web-demo .interest-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 21px; }
+    #law-feed-web-demo .chip {
+      padding: 6px 10px; border: 1px solid var(--lf-line); border-radius: 999px;
+      background: var(--lf-surface); color: var(--lf-text); font-size: 11px; white-space: nowrap;
+    }
+    #law-feed-web-demo .chip.active { border-color: transparent; background: var(--lf-accent-soft); color: var(--lf-accent); }
+    #law-feed-web-demo .tabs { display: flex; align-items: center; gap: 17px; border-bottom: 1px solid var(--lf-line); margin-bottom: 15px; }
+    #law-feed-web-demo .tab {
+      position: relative; border: 0; padding: 10px 2px 12px; background: transparent;
+      color: var(--lf-muted); font: inherit; font-size: 12px; white-space: nowrap;
+    }
+    #law-feed-web-demo .tab[aria-selected="true"] { color: var(--lf-text); font-weight: 600; }
+    #law-feed-web-demo .tab[aria-selected="true"]::after {
+      position: absolute; right: 0; bottom: -1px; left: 0; height: 2px;
+      border-radius: 2px; background: var(--lf-accent); content: "";
+    }
+    #law-feed-web-demo .feed-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 5px; }
+    #law-feed-web-demo .feed-heading { font-size: 14px; font-weight: 600; }
+    #law-feed-web-demo .refresh {
+      display: inline-flex; align-items: center; gap: 6px; border: 0; padding: 7px 2px;
+      background: transparent; color: var(--lf-accent); font: inherit; font-size: 11px;
+    }
+    #law-feed-web-demo .refresh i { width: 14px; height: 14px; }
+    #law-feed-web-demo .feed-note { min-height: 17px; margin: 0 0 9px; color: var(--lf-muted); font-size: 10px; }
+    #law-feed-web-demo .news-card {
+      margin-bottom: 11px; padding: 15px 16px; border: 1px solid var(--lf-line);
+      border-radius: 16px; background: var(--lf-surface);
+    }
+    #law-feed-web-demo .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    #law-feed-web-demo .match { color: var(--lf-accent); font-size: 10px; font-weight: 600; line-height: 1.5; }
+    #law-feed-web-demo .status {
+      flex: none; padding: 5px 8px; border-radius: 999px;
+      background: var(--lf-warm); color: var(--lf-warm-text); font-size: 9px; white-space: nowrap;
+    }
+    #law-feed-web-demo .news-title { margin: 8px 0 5px; font-size: 15px; line-height: 1.45; font-weight: 600; }
+    #law-feed-web-demo .summary { margin: 0; color: var(--lf-muted); font-size: 11px; line-height: 1.65; }
+    #law-feed-web-demo .reason { margin: 10px 0 10px; color: var(--lf-muted); font-size: 10px; line-height: 1.5; }
+    #law-feed-web-demo .reason strong { color: var(--lf-text); font-weight: 500; }
+    #law-feed-web-demo .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--lf-line); padding-top: 9px; color: var(--lf-muted); font-size: 9px; }
+    #law-feed-web-demo .source { display: flex; align-items: center; gap: 5px; min-width: 0; }
+    #law-feed-web-demo .source i { width: 12px; height: 12px; flex: none; }
+    #law-feed-web-demo .open-label { color: var(--lf-accent); white-space: nowrap; }
+    #law-feed-web-demo .right-rail { grid-column: 3; grid-row: 2; padding: 24px 16px; border-left: 1px solid var(--lf-line); }
+    #law-feed-web-demo .rail-section { margin-bottom: 17px; padding: 14px; border: 1px solid var(--lf-line); border-radius: 15px; background: var(--lf-surface); }
+    #law-feed-web-demo .rail-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px; font-weight: 600; }
+    #law-feed-web-demo .rail-head i { width: 16px; height: 16px; color: var(--lf-accent); }
+    #law-feed-web-demo .line-status { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; font-size: 11px; font-weight: 600; }
+    #law-feed-web-demo .connected-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lf-accent); }
+    #law-feed-web-demo .rail-copy { margin: 0 0 10px; color: var(--lf-muted); font-size: 10px; line-height: 1.6; }
+    #law-feed-web-demo .notify-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+    #law-feed-web-demo .notify-topic { padding: 5px 7px; border-radius: 8px; background: var(--lf-accent-soft); color: var(--lf-accent); font-size: 9px; }
+    #law-feed-web-demo .rail-action {
+      width: 100%; min-height: 34px; border: 1px solid var(--lf-line); border-radius: 9px;
+      background: var(--lf-surface); color: var(--lf-text); font: inherit; font-size: 10px;
+    }
+    #law-feed-web-demo .reason-list { display: grid; gap: 9px; }
+    #law-feed-web-demo .reason-row { display: flex; align-items: flex-start; gap: 8px; color: var(--lf-muted); font-size: 10px; line-height: 1.5; }
+    #law-feed-web-demo .reason-row i { width: 13px; height: 13px; flex: none; color: var(--lf-accent); }
+    #law-feed-web-demo .agenda-row { display: flex; gap: 9px; padding: 8px 0; border-bottom: 1px solid var(--lf-line); }
+    #law-feed-web-demo .agenda-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    #law-feed-web-demo .agenda-dot { width: 7px; height: 7px; flex: none; margin-top: 4px; border-radius: 50%; background: var(--lf-accent); }
+    #law-feed-web-demo .agenda-text { font-size: 10px; line-height: 1.5; }
+    #law-feed-web-demo .agenda-meta { display: block; margin-top: 2px; color: var(--lf-muted); font-size: 9px; }
+    @media (max-width: 900px) {
+      #law-feed-web-demo .app-shell { grid-template-columns: 176px minmax(0, 1fr); grid-template-rows: 66px auto auto; }
+      #law-feed-web-demo .sidebar { grid-row: 2 / span 2; }
+      #law-feed-web-demo .feed { grid-column: 2; grid-row: 2; padding: 24px 20px; }
+      #law-feed-web-demo .right-rail { grid-column: 2; grid-row: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0 20px 20px; border-left: 0; border-top: 1px solid var(--lf-line); }
+      #law-feed-web-demo .rail-section { margin: 12px 0 0; }
+    }
+    @media (max-width: 600px) {
+      #law-feed-web-demo { padding: 6px 0; }
+      #law-feed-web-demo .app-shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto; border-radius: 16px; }
+      #law-feed-web-demo .topbar { grid-column: 1; flex-wrap: wrap; gap: 10px; padding: 12px 15px; }
+      #law-feed-web-demo .topbar-right { gap: 7px; }
+      #law-feed-web-demo .account-chip { font-size: 10px; }
+      #law-feed-web-demo .sidebar { grid-column: 1; grid-row: 2; padding: 8px 10px; border-right: 0; border-bottom: 1px solid var(--lf-line); }
+      #law-feed-web-demo .side-label, #law-feed-web-demo .side-divider, #law-feed-web-demo .side-topics { display: none; }
+      #law-feed-web-demo .side-nav { display: flex; gap: 4px; overflow-x: auto; }
+      #law-feed-web-demo .nav-item { min-height: 38px; padding: 0 9px; gap: 6px; white-space: nowrap; font-size: 11px; }
+      #law-feed-web-demo .nav-item i { width: 15px; height: 15px; }
+      #law-feed-web-demo .feed { grid-column: 1; grid-row: 3; padding: 19px 14px 12px; }
+      #law-feed-web-demo .right-rail { grid-column: 1; grid-row: 4; grid-template-columns: minmax(0, 1fr); padding: 12px 14px 18px; border-top: 1px solid var(--lf-line); }
+      #law-feed-web-demo .rail-section { margin: 0; }
+      #law-feed-web-demo h1 { font-size: 21px; }
+    }
+  </style>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"><i data-lucide="scale" aria-hidden="true"></i></span><span>法訊雷達</span></div>
+      <div class="topbar-right">
+        <button class="icon-btn" type="button" aria-label="通知"><i data-lucide="bell" aria-hidden="true"></i></button>
+        <div class="account-chip"><span class="avatar">法</span><span>租屋族・學生打工</span></div>
+      </div>
+    </header>
+
+    <aside class="sidebar" aria-label="主要導覽">
+      <p class="side-label">工作區</p>
+      <nav class="side-nav">
+        <div class="nav-item active"><i data-lucide="house" aria-hidden="true"></i><span>首頁推薦</span></div>
+        <div class="nav-item"><i data-lucide="landmark" aria-hidden="true"></i><span>立法院情報</span></div>
+        <div class="nav-item"><i data-lucide="messages-square" aria-hidden="true"></i><span>問法訊</span></div>
+        <div class="nav-item"><i data-lucide="bookmark" aria-hidden="true"></i><span>已收藏</span></div>
+      </nav>
+      <div class="side-divider"></div>
+      <p class="side-label">我的關注</p>
+      <div class="side-topics">
+        <div class="topic-link"><span class="topic-dot"></span><span>租屋權益</span></div>
+        <div class="topic-link"><span class="topic-dot"></span><span>學生打工</span></div>
+      </div>
+    </aside>
+
+    <main class="feed">
+      <p class="eyebrow">個人化法訊</p>
+      <h1>早安，這些法訊和你有關</h1>
+      <p class="subtitle">依照你的關注與近期法律動態，整理值得查看的更新。</p>
+      <div class="interest-row" aria-label="目前關注的身分與議題">
+        <span class="chip active">租屋族</span>
+        <span class="chip active">學生打工</span>
+        <span class="chip">＋ 編輯關注</span>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="法訊排序方式">
+        <button class="tab" id="tab-recommended" type="button" role="tab" aria-controls="feed-panel" aria-selected="true" data-feed-mode="recommended">為你推薦</button>
+        <button class="tab" id="tab-following" type="button" role="tab" aria-controls="feed-panel" aria-selected="false" data-feed-mode="following">我追蹤的</button>
+        <button class="tab" id="tab-latest" type="button" role="tab" aria-controls="feed-panel" aria-selected="false" data-feed-mode="latest">最新消息</button>
+      </div>
+      <div class="feed-toolbar">
+        <span class="feed-heading" id="feed-heading">今天為你整理</span>
+        <button class="refresh" id="feed-refresh" type="button"><i data-lucide="rotate-cw" aria-hidden="true"></i>更新推薦</button>
+      </div>
+      <div class="feed-note" id="feed-note" aria-live="polite">依關注身分、議題進度與新近程度排序</div>
+
+      <section id="feed-items" role="tabpanel" aria-labelledby="tab-recommended" aria-label="個人化消息">
+        <article class="news-card">
+          <div class="card-top"><span class="match">因你關注「租屋權益」</span><span class="status">委員會審查</span></div>
+          <h2 class="news-title">租屋議題出現新進度</h2>
+          <p class="summary">查看相關會議議程、討論摘要與目前法案狀態。</p>
+          <p class="reason"><strong>推薦原因</strong>　你追蹤租屋權益，且這則消息剛有進度更新。</p>
+          <div class="card-footer"><span class="source"><i data-lucide="landmark" aria-hidden="true"></i>立法院議事資料 · 示意消息</span><span class="open-label">查看進度 →</span></div>
+        </article>
+        <article class="news-card">
+          <div class="card-top"><span class="match">可能和「學生打工」有關</span><span class="status">會議議程</span></div>
+          <h2 class="news-title">本週勞動議題整理</h2>
+          <p class="summary">快速掌握討論主題，並查看資料來源與最新狀態。</p>
+          <p class="reason"><strong>推薦原因</strong>　符合你的關注標籤「學生打工」。</p>
+          <div class="card-footer"><span class="source"><i data-lucide="landmark" aria-hidden="true"></i>立法院議事資料 · 示意消息</span><span class="open-label">看摘要 →</span></div>
+        </article>
+      </section>
+    </main>
+
+    <aside class="right-rail" aria-label="個人化工具與提醒">
+      <section class="rail-section">
+        <div class="rail-head"><i data-lucide="message-circle" aria-hidden="true"></i><span>LINE 個人通知</span></div>
+        <div class="line-status"><span class="connected-dot"></span><span>官方帳號已連結（示意）</span></div>
+        <p class="rail-copy">依你的關注，把重要法案進度與議事更新傳到 LINE。</p>
+        <div class="notify-topics"><span class="notify-topic">租屋權益</span><span class="notify-topic">學生打工</span></div>
+        <button class="rail-action" type="button">管理通知偏好</button>
+      </section>
+
+      <section class="rail-section">
+        <div class="rail-head"><i data-lucide="sparkles" aria-hidden="true"></i><span>推薦依據</span></div>
+        <div class="reason-list">
+          <div class="reason-row"><i data-lucide="tags" aria-hidden="true"></i><span>你選擇的身分與關注議題</span></div>
+          <div class="reason-row"><i data-lucide="clock-3" aria-hidden="true"></i><span>最新進度、會議日期與時效</span></div>
+          <div class="reason-row"><i data-lucide="thumbs-up" aria-hidden="true"></i><span>你追蹤、收藏與回饋的內容</span></div>
+        </div>
+      </section>
+
+      <section class="rail-section">
+        <div class="rail-head"><i data-lucide="calendar-days" aria-hidden="true"></i><span>立法院會議情報</span></div>
+        <div class="agenda-row"><span class="agenda-dot"></span><div class="agenda-text">與你關注議題相關的會議<span class="agenda-meta">議程摘要 · 示意資訊</span></div></div>
+        <div class="agenda-row"><span class="agenda-dot"></span><div class="agenda-text">近期法案狀態更新<span class="agenda-meta">提案與審查進度 · 示意資訊</span></div></div>
+      </section>
+    </aside>
+  </div>
+
+  <script>
+    const root = document.getElementById("law-feed-web-demo");
+    const feedCards = Array.from(root.querySelectorAll(".news-card"));
+    const feedTabs = Array.from(root.querySelectorAll("[data-feed-mode]"));
+    const feedHeading = root.querySelector("#feed-heading");
+    const feedNote = root.querySelector("#feed-note");
+    let activeMode = "recommended";
+    let refreshIndex = 0;
+
+    const feeds = {
+      recommended: {
+        heading: "今天為你整理",
+        note: "依關注身分、議題進度與新近程度排序",
+        cards: [
+          [
+            ["因你關注「租屋權益」", "委員會審查", "租屋議題出現新進度", "查看相關會議議程、討論摘要與目前法案狀態。", "你追蹤租屋權益，且這則消息剛有進度更新。", "立法院議事資料 · 示意消息", "查看進度 →"],
+            ["可能和「學生打工」有關", "會議議程", "本週勞動議題整理", "快速掌握討論主題，並查看資料來源與最新狀態。", "符合你的關注標籤「學生打工」。", "立法院議事資料 · 示意消息", "看摘要 →"]
+          ],
+          [
+            ["可能和「學生打工」有關", "最新資料", "打工族關注議題有新資料", "整理相關議題進度，附會議摘要與可追溯來源。", "你關注學生打工，且最近閱讀過勞動議題。", "立法院議事資料 · 示意消息", "查看進度 →"],
+            ["因你關注「租屋權益」", "近期討論", "租屋相關會議重點整理", "查看會議討論主題，以及提案目前進行到哪個階段。", "符合你的租屋關注，且近期有相關會議。", "立法院議事資料 · 示意消息", "看摘要 →"]
+          ]
+        ]
+      },
+      following: {
+        heading: "你追蹤的議題",
+        note: "只顯示你主動追蹤的身分與議題",
+        cards: [[
+          ["你追蹤的「租屋權益」", "進度更新", "租屋議題出現新進度", "查看相關會議議程、討論摘要與目前法案狀態。", "這是你主動追蹤的議題。", "立法院議事資料 · 示意消息", "查看進度 →"],
+          ["你追蹤的「學生打工」", "會議議程", "本週勞動議題整理", "快速掌握討論主題，並查看資料來源與最新狀態。", "這是你主動追蹤的議題。", "立法院議事資料 · 示意消息", "看摘要 →"]
+        ]]
+      },
+      latest: {
+        heading: "最新法訊",
+        note: "按發布時間排列，保留與你的標籤關聯提示",
+        cards: [[
+          ["最新發布 · 可能和你有關", "最新消息", "近期立法院議程整理", "查看最新議程摘要，確認議題、會議與官方資料。", "其中部分內容與你追蹤的議題相符。", "立法院議事資料 · 示意消息", "看摘要 →"],
+          ["最新發布 · 租屋權益", "狀態更新", "相關提案狀態有更新", "查看提案目前進度，以及會議資料與來源。", "你追蹤了租屋權益。", "立法院議事資料 · 示意消息", "查看進度 →"]
+        ]]
+      }
+    };
+
+    function renderFeed() {
+      const feed = feeds[activeMode];
+      const items = feed.cards[refreshIndex % feed.cards.length];
+      feedHeading.textContent = feed.heading;
+      feedNote.textContent = feed.note;
+      feedCards.forEach((card, index) => {
+        const item = items[index];
+        card.querySelector(".match").textContent = item[0];
+        card.querySelector(".status").textContent = item[1];
+        card.querySelector(".news-title").textContent = item[2];
+        card.querySelector(".summary").textContent = item[3];
+        card.querySelector(".reason").innerHTML = "<strong>推薦原因</strong>　" + item[4];
+        card.querySelector(".source").lastChild.textContent = item[5];
+        card.querySelector(".open-label").textContent = item[6];
+      });
+    }
+
+    function syncTabs() {
+      feedTabs.forEach((tab) => tab.setAttribute("aria-selected", String(tab.dataset.feedMode === activeMode)));
+      root.querySelector("#feed-items").setAttribute("aria-labelledby", "tab-" + activeMode);
+    }
+
+    function restoreState(state) {
+      const model = state && state.modelContent;
+      if (!model || typeof model !== "object") return;
+      if (feeds[model.activeMode]) activeMode = model.activeMode;
+      if (Number.isInteger(model.refreshIndex) && model.refreshIndex >= 0) refreshIndex = model.refreshIndex;
+      syncTabs();
+      renderFeed();
+    }
+
+    function saveState() {
+      if (window.openai && typeof window.openai.setWidgetState === "function") {
+        window.openai.setWidgetState({
+          modelContent: { activeMode, refreshIndex },
+          privateContent: null
+        }).catch(() => {});
+      }
+    }
+
+    feedTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        activeMode = tab.dataset.feedMode;
+        refreshIndex = 0;
+        syncTabs();
+        renderFeed();
+        saveState();
+      });
+    });
+
+    root.querySelector("#feed-refresh").addEventListener("click", () => {
+      refreshIndex += 1;
+      renderFeed();
+      feedNote.textContent = "已重新整理：" + feeds[activeMode].note;
+      saveState();
+    });
+    renderFeed();
+    if (window.openai && window.openai.widgetState) restoreState(window.openai.widgetState);
+    window.addEventListener("openai:set_globals", (event) => {
+      const state = event.detail && event.detail.globals && event.detail.globals.widgetState;
+      if (state) restoreState(state);
+    });
+  </script>
+</div>
+</body>
+</html>
