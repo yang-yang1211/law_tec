@@ -20,4 +20,4 @@
 
 ## GitHub 工作方式
 
-每項工作以 GitHub Issue 管理，使用 GitHub Projects 狀態欄：`Backlog`、`Ready`、`In progress`、`Review`、`Done`。任務需有負責角色、交付物、截止日與驗收條件。分支和 PR 規則見 [團隊分工與 GitHub 協作](docs/團隊分工與GitHub協作.md)。
+目前以 [GitHub Issues 任務列表](https://github.com/yang-yang1211/law_tec/issues)追蹤 P-01–P-10。Issue 內標明負責角色、交付物、截止日與驗收條件；成員帳號確認後再加上實際 assignee。PR 和日常同步規則見 [團隊分工與 GitHub 協作](docs/團隊分工與GitHub協作.md)。
