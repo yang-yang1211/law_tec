@@ -3,390 +3,153 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>法訊雷達｜個人化首頁原型</title>
+  <meta name="theme-color" content="#f6f8f5">
+  <title>法訊雷達｜你的個人化法訊首頁</title>
   <style>
-    :root { color-scheme: light dark; }
-    body { margin: 0; min-width: 320px; background: light-dark(#eaf0ec, #111613); }
-    i[data-lucide] { display: inline-flex; align-items: center; justify-content: center; font-style: normal; }
-    i[data-lucide="scale"]::before { content: "§"; }
-    i[data-lucide="bell"]::before { content: "♧"; }
-    i[data-lucide="house"]::before { content: "⌂"; }
-    i[data-lucide="landmark"]::before { content: "▤"; }
-    i[data-lucide="messages-square"]::before { content: "☷"; }
-    i[data-lucide="bookmark"]::before { content: "▮"; }
-    i[data-lucide="rotate-cw"]::before { content: "↻"; }
-    i[data-lucide="message-circle"]::before { content: "●"; }
-    i[data-lucide="sparkles"]::before { content: "✦"; }
-    i[data-lucide="tags"]::before { content: "⌗"; }
-    i[data-lucide="clock-3"]::before { content: "◷"; }
-    i[data-lucide="thumbs-up"]::before { content: "↑"; }
-    i[data-lucide="calendar-days"]::before { content: "▦"; }
+    :root{font-family:Inter,"Noto Sans TC","PingFang TC",system-ui,sans-serif;color:#1c2923;background:#f6f8f5;font-synthesis:none;text-rendering:optimizeLegibility;--ink:#1c2923;--muted:#77837c;--line:#e5ebe6;--paper:#fff;--canvas:#f6f8f5;--green:#246b4b;--green2:#e9f3ec;--mint:#ccebd7;--yellow:#f4c875;--shadow:0 12px 36px #203b2b0a}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;background:var(--canvas)}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #72b78c;outline-offset:2px}svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.app{min-height:100vh}.topbar{height:70px;position:sticky;top:0;z-index:20;background:#ffffffed;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:28px;padding:0 max(24px,calc((100vw - 1460px)/2))}.brand{width:226px;flex:none;display:flex;align-items:center;gap:11px;color:var(--ink);font-size:17px;font-weight:750;letter-spacing:.01em}.brand-mark{width:36px;height:36px;border-radius:12px;background:var(--green);color:#fff;display:grid;place-items:center}.brand-mark svg{width:20px;height:20px}.brand small{display:block;font-size:9px;letter-spacing:.1em;color:#87938b;font-weight:650;margin-top:2px}.searchbox{height:40px;max-width:510px;flex:1;position:relative}.searchbox svg{position:absolute;left:13px;top:11px;color:#8a968f;width:17px}.searchbox input{width:100%;height:100%;border:1px solid var(--line);background:#f8faf8;border-radius:12px;padding:0 16px 0 40px;font-size:12px;color:var(--ink)}.searchbox input::placeholder{color:#9aa49e}.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}.icon-button{width:38px;height:38px;border:1px solid var(--line);border-radius:12px;background:#fff;display:grid;place-items:center;position:relative}.icon-button:hover,.quiet-button:hover{background:#f1f6f2}.unread{position:absolute;right:7px;top:7px;width:7px;height:7px;background:#e58462;border:1px solid #fff;border-radius:50%}.profile-button{height:40px;border:0;background:transparent;display:flex;align-items:center;gap:9px;padding:0 3px 0 8px}.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#deeee3;color:var(--green);font-size:12px;font-weight:750}.profile-copy{text-align:left;font-size:11px;font-weight:700;line-height:1.35}.profile-copy span{display:block;color:var(--muted);font-size:9px;font-weight:500}.layout{width:min(1460px,100%);margin:0 auto;display:grid;grid-template-columns:226px minmax(0,650px) 300px;justify-content:center;gap:28px;padding:27px 24px 56px}.sidebar{position:sticky;top:96px;align-self:start;min-height:calc(100vh - 122px);display:flex;flex-direction:column}.side-label{font-size:10px;font-weight:700;color:#a1aaa4;letter-spacing:.1em;margin:11px 12px}.nav-list{display:grid;gap:4px}.nav-link{width:100%;display:flex;align-items:center;gap:12px;min-height:43px;padding:0 13px;border:0;border-radius:12px;background:transparent;text-align:left;color:#66746c;font-size:12px;font-weight:550}.nav-link svg{width:17px;height:17px;color:#89958e}.nav-link:hover{background:#edf3ee;color:var(--ink)}.nav-link.active{background:#e8f2eb;color:var(--green);font-weight:700}.nav-link.active svg{color:var(--green)}.nav-count{margin-left:auto;padding:2px 7px;background:#fff;border-radius:99px;color:var(--green);font-size:10px}.side-divider{height:1px;background:var(--line);margin:20px 10px 12px}.topic-shortcuts{display:grid;gap:2px}.topic-shortcut{display:flex;align-items:center;gap:10px;padding:9px 12px;color:#65736b;font-size:11px}.topic-color{width:8px;height:8px;border-radius:50%;background:#76aa82}.topic-shortcut:nth-child(2) .topic-color{background:#dfa966}.topic-shortcut:nth-child(3) .topic-color{background:#8e9ac2}.sidebar-spacer{flex:1}.sidebar-note{margin:18px 4px 0;padding:13px 13px 14px;background:#eef4ef;border-radius:14px;color:#5e7064;font-size:10px;line-height:1.65}.sidebar-note strong{display:block;color:#355d43;font-size:11px;margin-bottom:3px}.main{min-width:0}.view{display:none}.view.active{display:block}.welcome{padding:4px 2px 0}.eyebrow{display:flex;align-items:center;gap:6px;color:var(--green);font-size:10px;font-weight:750;letter-spacing:.07em}.eyebrow .sparkle{font-size:14px}.welcome-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-top:7px}.welcome h1{margin:0;font-size:25px;letter-spacing:-.04em;line-height:1.36;font-weight:760}.subcopy{margin:7px 0 0;color:var(--muted);font-size:11px;line-height:1.65}.date-label{flex:none;color:#87938b;font-size:10px;padding-bottom:3px}.identity-row{display:flex;align-items:center;gap:7px;overflow:auto;scrollbar-width:none;margin:18px 0 19px}.identity-row::-webkit-scrollbar{display:none}.pill{white-space:nowrap;border:1px solid #dce7de;color:#497456;background:#edf5ef;border-radius:30px;padding:7px 11px;font-size:10px;font-weight:650}.pill.subtle{background:#fff;color:#76837a;border-color:var(--line)}.pill.add{display:inline-flex;align-items:center;gap:4px;color:#68766e;background:#fff}.pill.add:hover{border-color:#a9cbb2;color:var(--green)}.feed-toolbar{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);margin-bottom:15px}.tabs{display:flex;align-items:center;gap:21px}.tab{position:relative;border:0;background:transparent;padding:11px 1px 12px;color:#8a968e;font-size:11px;font-weight:600}.tab.selected{color:var(--ink);font-weight:750}.tab.selected:after{content:"";position:absolute;height:2px;bottom:-1px;left:0;right:0;background:var(--green);border-radius:4px}.refresh-button{border:0;background:transparent;color:var(--green);font-size:10px;font-weight:650;display:flex;align-items:center;gap:5px;padding:8px 0}.refresh-button svg{width:14px;height:14px}.feed-caption{display:flex;justify-content:space-between;align-items:center;margin:0 1px 10px;color:#88948c;font-size:9px}.feed-caption strong{font-size:11px;color:#33443a;font-weight:700}.feed-list{display:grid;gap:12px}.story{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 17px 13px;box-shadow:var(--shadow);transition:transform .16s ease,border-color .16s ease}.story:hover{transform:translateY(-1px);border-color:#cbdace}.story-top{display:flex;align-items:center;gap:8px;min-width:0}.source-avatar{width:27px;height:27px;flex:none;display:grid;place-items:center;border-radius:9px;background:#edf4ef;color:var(--green)}.source-avatar svg{width:15px;height:15px}.source-name{font-size:10px;font-weight:700;color:#48564d}.story-time{color:#9aa49e;font-size:9px;margin-left:2px}.more-button{border:0;background:transparent;color:#9ba59e;margin-left:auto;padding:3px}.more-button svg{width:16px;height:16px}.story-tag{margin-left:auto;flex:none;background:#f5f3ed;color:#8e7650;border-radius:6px;padding:5px 7px;font-size:8px;font-weight:650}.story-title{font-size:15px;line-height:1.48;letter-spacing:-.015em;margin:12px 0 5px;font-weight:740}.story-summary{font-size:10px;color:#647168;line-height:1.75;margin:0}.relevance{margin-top:11px;background:#f7faf7;border-radius:8px;padding:8px 10px;display:flex;gap:7px;color:#66766b;font-size:9px;line-height:1.55}.relevance b{flex:none;color:#438057;font-weight:700}.story-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px;padding-top:10px;border-top:1px solid #f0f3f0;color:#96a099;font-size:9px}.source-meta{display:flex;align-items:center;gap:5px;min-width:0}.source-meta svg{width:13px;height:13px;flex:none}.source-meta span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.story-actions{display:flex;align-items:center;gap:12px;flex:none}.text-action{border:0;background:transparent;color:#89958d;font-size:9px;padding:3px 0;display:inline-flex;align-items:center;gap:4px}.text-action svg{width:13px;height:13px}.text-action:hover,.text-action.saved{color:var(--green)}.story-hero{margin:12px 0 0;height:116px;border-radius:11px;overflow:hidden;position:relative;background:linear-gradient(120deg,#e7f2e9,#f8f0df)}.hero-shape{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding:0 27px;color:#367750}.hero-shape:before,.hero-shape:after{content:"";position:absolute;border:1px solid #97bea1;border-radius:50%}.hero-shape:before{width:148px;height:148px;right:42px;top:-54px}.hero-shape:after{width:102px;height:102px;right:65px;top:-30px}.hero-label{position:absolute;left:19px;top:21px;color:#345943;font-size:9px;letter-spacing:.1em;font-weight:750}.hero-title{position:absolute;left:19px;top:43px;color:#244833;font-size:16px;font-weight:750}.hero-mark{position:absolute;right:82px;top:30px;width:50px;height:56px;border:1.5px solid #60936c;border-radius:5px;background:#ffffff90;transform:rotate(6deg);display:grid;place-items:center}.hero-mark svg{width:25px;height:25px}.rail{padding-top:3px}.rail-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;margin-bottom:12px;box-shadow:var(--shadow)}.rail-title{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:750;margin:0 0 12px}.rail-icon{width:27px;height:27px;border-radius:9px;background:var(--green2);color:var(--green);display:grid;place-items:center}.rail-icon svg{width:15px;height:15px}.line-connected{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:#3c6e49}.status-dot{width:7px;height:7px;border-radius:99px;background:#5da66e}.rail-copy{margin:7px 0 11px;color:#7a877e;font-size:9px;line-height:1.65}.notify-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}.notify-chip{padding:5px 7px;border-radius:6px;background:#f0f6f1;color:#62806a;font-size:8px}.outline-button,.solid-button{width:100%;min-height:34px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#54635a;font-size:9px;font-weight:650}.outline-button:hover{border-color:#b9d1bf;color:var(--green)}.solid-button{background:var(--green);border-color:var(--green);color:#fff}.solid-button:hover{background:#1d5d3f}.rail-divider{height:1px;background:#eff2ef;margin:12px 0}.agenda-item{display:flex;gap:8px;padding:9px 0;border-bottom:1px solid #f0f3f0}.agenda-item:last-child{padding-bottom:0;border-bottom:0}.agenda-dot{width:7px;height:7px;border-radius:50%;background:#85ad8c;flex:none;margin-top:4px}.agenda-name{font-size:9px;line-height:1.5;color:#4f5f55}.agenda-date{display:block;margin-top:3px;color:#9ba59e;font-size:8px}.reason-list{display:grid;gap:10px}.reason-item{display:flex;align-items:flex-start;gap:8px;color:#748078;font-size:9px;line-height:1.5}.reason-item svg{width:14px;height:14px;flex:none;color:#6b9d76}.fine-print{font-size:8px;line-height:1.65;color:#a0aaa3;margin:10px 1px}.page-heading{margin:6px 0 16px}.page-heading h1{font-size:23px;line-height:1.4;margin:0;letter-spacing:-.035em}.page-heading p{font-size:11px;color:var(--muted);line-height:1.65;margin:5px 0 0}.section-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin:12px 0;box-shadow:var(--shadow)}.section-card h2{margin:0 0 5px;font-size:13px}.section-card p{color:#78847c;font-size:10px;line-height:1.7;margin:0}.section-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.section-toolbar h2{margin:0}.select-small{padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#fff;color:#637068;font-size:9px}.agenda-list,.bill-list{display:grid}.agenda-line,.bill-line{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid #eff2ef}.agenda-datebox{width:44px;flex:none;text-align:center;background:#f1f6f1;border-radius:9px;padding:7px 2px;color:#477452;font-size:9px;font-weight:700}.agenda-datebox span{display:block;color:#8a998d;font-size:8px;margin-top:2px;font-weight:500}.agenda-line h3,.bill-line h3{margin:0 0 4px;font-size:10px;line-height:1.55}.agenda-line p,.bill-line p{margin:0;color:#839087;font-size:9px;line-height:1.55}.status-label{display:inline-flex;margin-top:6px;padding:4px 6px;border-radius:5px;background:#f5f3ed;color:#92794e;font-size:8px}.status-label.green{background:#edf5ef;color:#5a8762}.info-banner{padding:11px 13px;background:#f1f6f1;border-radius:10px;color:#6e7c72;font-size:9px;line-height:1.6;margin-bottom:12px}.chat-wrap{min-height:510px;display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}.chat-head{padding:15px 17px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #eff2ef}.bot-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#e9f3ec;color:var(--green)}.bot-icon svg{width:18px;height:18px}.chat-head strong{font-size:11px}.chat-head small{display:block;color:#89958d;font-size:9px;margin-top:3px}.chat-log{padding:18px;flex:1;display:flex;flex-direction:column;gap:13px}.chat-welcome{max-width:86%;padding:12px 13px;border-radius:4px 12px 12px 12px;background:#f2f6f2;color:#5a685f;font-size:10px;line-height:1.75}.chat-welcome b{display:block;font-size:11px;color:#34483a;margin-bottom:3px}.prompt-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}.prompt-chip{padding:7px 9px;background:#fff;border:1px solid var(--line);border-radius:99px;color:#5c7462;font-size:9px}.prompt-chip:hover{background:#eff6f0}.chat-message{max-width:86%;align-self:flex-end;padding:10px 12px;background:#e8f2eb;border-radius:12px 4px 12px 12px;font-size:10px;line-height:1.7;color:#395744}.chat-answer{max-width:92%;padding:12px 13px;background:#f2f6f2;border-radius:4px 12px 12px 12px;color:#5b6b60;font-size:10px;line-height:1.75}.answer-source{display:block;border-top:1px solid #e2eae3;margin-top:9px;padding-top:8px;color:#4d7959;font-size:9px}.chat-compose{padding:12px;border-top:1px solid #eff2ef;display:flex;gap:8px}.chat-compose input{min-width:0;flex:1;height:38px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font-size:10px}.send-button{width:39px;height:38px;border:0;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center}.send-button svg{width:16px;height:16px}.chat-disclaimer{padding:0 15px 12px;text-align:center;color:#a0aaa3;font-size:8px}.saved-empty{padding:48px 20px;text-align:center;background:white;border:1px dashed #d7e2d9;border-radius:15px;color:#849087}.saved-empty svg{width:26px;height:26px;margin:0 auto 10px;color:#7ca287}.saved-empty strong{display:block;color:#53635a;font-size:12px;margin-bottom:5px}.saved-empty p{margin:0;font-size:9px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.setting-tile{padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff}.setting-tile strong{font-size:10px;display:block;margin-bottom:4px}.setting-tile span{font-size:9px;color:#839087;line-height:1.5}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #eff2ef;font-size:10px;color:#66746b}.switch{appearance:none;width:32px;height:18px;border-radius:99px;background:#dce3dd;position:relative;transition:.18s}.switch:before{content:"";position:absolute;width:14px;height:14px;left:2px;top:2px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0002;transition:.18s}.switch:checked{background:#4d9462}.switch:checked:before{transform:translateX(14px)}.toast{position:fixed;bottom:24px;left:50%;z-index:60;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#263d2e;color:#fff;border-radius:10px;padding:10px 15px;font-size:10px;box-shadow:0 8px 30px #17271c30;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.modal-backdrop{position:fixed;inset:0;z-index:40;background:#14231b70;display:none;align-items:center;justify-content:center;padding:20px}.modal-backdrop.open{display:flex}.modal{width:min(520px,100%);max-height:min(86vh,760px);overflow:auto;background:#fff;border-radius:18px;padding:21px;box-shadow:0 24px 70px #0a1d1050}.modal-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.modal-top h2{font-size:17px;margin:0}.modal-top p{font-size:10px;color:#829087;line-height:1.65;margin:6px 0 0}.modal-close{width:30px;height:30px;border:0;border-radius:9px;background:#f2f5f2;display:grid;place-items:center}.modal-close svg{width:15px;height:15px}.option-group{margin:20px 0 0}.option-group h3{font-size:10px;color:#56665c;margin:0 0 9px}.option-grid{display:flex;flex-wrap:wrap;gap:7px}.option-chip{border:1px solid var(--line);background:#fff;color:#69766e;border-radius:99px;padding:8px 11px;font-size:9px}.option-chip.selected{border-color:#b7d2bd;background:#edf5ef;color:#3d754b}.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.modal-footer button{width:auto;min-width:92px;padding:0 13px}.detail-source{margin-top:14px;border:1px solid #e7eee8;border-radius:10px;padding:11px;color:#6e7c72;font-size:9px;line-height:1.7}.detail-source b{color:#486b50}.mobile-bottom{display:none}
+    @media(max-width:1190px){.layout{grid-template-columns:196px minmax(0,650px) 270px;gap:18px;padding-left:18px;padding-right:18px}.brand{width:196px}.rail{font-size:95%}}
+    @media(max-width:1000px){.layout{grid-template-columns:190px minmax(0,680px);max-width:920px}.rail{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:0}.rail-card{margin:0}.fine-print{grid-column:1/-1}.brand{width:190px}}
+    @media(max-width:680px){.topbar{height:60px;padding:0 14px;gap:10px}.brand{width:auto;min-width:0;font-size:14px}.brand-mark{width:33px;height:33px}.brand small{display:none}.searchbox{display:none}.top-actions{gap:6px}.profile-copy{display:none}.profile-button{padding:0 0 0 2px}.icon-button{width:35px;height:35px}.layout{display:block;padding:18px 13px 82px}.sidebar{display:none}.main{width:100%}.welcome h1{font-size:22px}.welcome-row{align-items:flex-start}.date-label{display:none}.identity-row{margin:14px 0 15px}.tabs{gap:17px}.tab{font-size:10px}.story{padding:14px 13px 12px}.story-title{font-size:14px}.story-summary{font-size:10px}.story-actions{gap:8px}.rail{display:grid;grid-template-columns:1fr;margin-top:15px}.rail-card{padding:14px}.mobile-bottom{position:fixed;bottom:0;left:0;right:0;height:61px;padding:5px 12px max(5px,env(safe-area-inset-bottom));display:flex;justify-content:space-around;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:25}.mobile-bottom button{border:0;background:transparent;color:#869189;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:57px;font-size:8px}.mobile-bottom button.active{color:var(--green);font-weight:700}.mobile-bottom svg{width:18px;height:18px}.page-heading h1{font-size:21px}.settings-grid{grid-template-columns:1fr}.chat-wrap{min-height:calc(100vh - 210px)}.story-hero{height:105px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-<div id="law-feed-web-demo" class="viz-dotted-background" aria-label="法訊雷達網頁首頁示意">
-  <style>
-    #law-feed-web-demo {
-      color-scheme: light dark;
-      --lf-bg: light-dark(#f4f7f5, #151a18);
-      --lf-surface: light-dark(#ffffff, #202724);
-      --lf-text: light-dark(#18211d, #edf3ef);
-      --lf-muted: light-dark(#65736b, #a5b2aa);
-      --lf-line: light-dark(#e2e9e4, #35413a);
-      --lf-accent: light-dark(#216b4b, #87d2a9);
-      --lf-accent-soft: light-dark(#e6f3eb, #263d31);
-      --lf-warm: light-dark(#fff3df, #473824);
-      --lf-warm-text: light-dark(#775019, #f2cf91);
-      box-sizing: border-box;
-      padding: 18px 12px;
-      color: var(--lf-text);
-      font-family: Inter, "Noto Sans TC", system-ui, sans-serif;
-    }
-    #law-feed-web-demo *, #law-feed-web-demo *::before, #law-feed-web-demo *::after { box-sizing: border-box; }
-    #law-feed-web-demo .app-shell {
-      width: min(100%, 1220px);
-      min-height: 760px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 218px minmax(0, 1fr) 258px;
-      grid-template-rows: 68px 1fr;
-      overflow: hidden;
-      border: 1px solid var(--lf-line);
-      border-radius: 22px;
-      background: var(--lf-bg);
-      box-shadow: 0 18px 48px light-dark(#26382e20, #00000050);
-    }
-    #law-feed-web-demo .topbar {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 0 24px;
-      border-bottom: 1px solid var(--lf-line);
-      background: var(--lf-surface);
-    }
-    #law-feed-web-demo .brand { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; white-space: nowrap; }
-    #law-feed-web-demo .brand-mark {
-      width: 34px; height: 34px; display: grid; place-items: center;
-      border-radius: 11px; background: var(--lf-accent); color: light-dark(#fff, #12271b);
-    }
-    #law-feed-web-demo .brand-mark i { width: 19px; height: 19px; }
-    #law-feed-web-demo .topbar-right { display: flex; align-items: center; gap: 12px; }
-    #law-feed-web-demo .account-chip {
-      display: flex; align-items: center; gap: 9px; padding: 6px 10px 6px 6px;
-      border: 1px solid var(--lf-line); border-radius: 999px; background: var(--lf-surface);
-      font-size: 12px; white-space: nowrap;
-    }
-    #law-feed-web-demo .avatar {
-      width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%;
-      background: var(--lf-accent-soft); color: var(--lf-accent); font-size: 11px; font-weight: 600;
-    }
-    #law-feed-web-demo .icon-btn {
-      min-width: 38px; min-height: 38px; display: inline-flex; align-items: center; justify-content: center;
-      border: 1px solid var(--lf-line); border-radius: 12px; background: var(--lf-surface); color: var(--lf-text);
-    }
-    #law-feed-web-demo .icon-btn i { width: 17px; height: 17px; }
-    #law-feed-web-demo .sidebar { grid-column: 1; grid-row: 2; padding: 23px 14px; border-right: 1px solid var(--lf-line); background: var(--lf-surface); }
-    #law-feed-web-demo .side-label { margin: 0 11px 10px; color: var(--lf-muted); font-size: 10px; letter-spacing: .08em; }
-    #law-feed-web-demo .side-nav { display: grid; gap: 4px; }
-    #law-feed-web-demo .nav-item {
-      min-height: 42px; display: flex; align-items: center; gap: 11px; padding: 0 11px;
-      border-radius: 11px; color: var(--lf-muted); font-size: 13px;
-    }
-    #law-feed-web-demo .nav-item i { width: 17px; height: 17px; }
-    #law-feed-web-demo .nav-item.active { background: var(--lf-accent-soft); color: var(--lf-accent); font-weight: 600; }
-    #law-feed-web-demo .side-divider { height: 1px; margin: 19px 8px; background: var(--lf-line); }
-    #law-feed-web-demo .side-topics { display: grid; gap: 3px; }
-    #law-feed-web-demo .topic-link { display: flex; align-items: center; gap: 9px; padding: 9px 11px; color: var(--lf-text); font-size: 12px; }
-    #law-feed-web-demo .topic-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lf-accent); }
-    #law-feed-web-demo .feed { grid-column: 2; grid-row: 2; min-width: 0; padding: 28px 27px 30px; }
-    #law-feed-web-demo .eyebrow { margin: 0 0 6px; color: var(--lf-accent); font-size: 11px; font-weight: 600; letter-spacing: .03em; }
-    #law-feed-web-demo h1 { margin: 0; font-size: 24px; line-height: 1.4; letter-spacing: -.02em; }
-    #law-feed-web-demo .subtitle { margin: 5px 0 15px; color: var(--lf-muted); font-size: 13px; line-height: 1.6; }
-    #law-feed-web-demo .interest-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 21px; }
-    #law-feed-web-demo .chip {
-      padding: 6px 10px; border: 1px solid var(--lf-line); border-radius: 999px;
-      background: var(--lf-surface); color: var(--lf-text); font-size: 11px; white-space: nowrap;
-    }
-    #law-feed-web-demo .chip.active { border-color: transparent; background: var(--lf-accent-soft); color: var(--lf-accent); }
-    #law-feed-web-demo .tabs { display: flex; align-items: center; gap: 17px; border-bottom: 1px solid var(--lf-line); margin-bottom: 15px; }
-    #law-feed-web-demo .tab {
-      position: relative; border: 0; padding: 10px 2px 12px; background: transparent;
-      color: var(--lf-muted); font: inherit; font-size: 12px; white-space: nowrap;
-    }
-    #law-feed-web-demo .tab[aria-selected="true"] { color: var(--lf-text); font-weight: 600; }
-    #law-feed-web-demo .tab[aria-selected="true"]::after {
-      position: absolute; right: 0; bottom: -1px; left: 0; height: 2px;
-      border-radius: 2px; background: var(--lf-accent); content: "";
-    }
-    #law-feed-web-demo .feed-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 5px; }
-    #law-feed-web-demo .feed-heading { font-size: 14px; font-weight: 600; }
-    #law-feed-web-demo .refresh {
-      display: inline-flex; align-items: center; gap: 6px; border: 0; padding: 7px 2px;
-      background: transparent; color: var(--lf-accent); font: inherit; font-size: 11px;
-    }
-    #law-feed-web-demo .refresh i { width: 14px; height: 14px; }
-    #law-feed-web-demo .feed-note { min-height: 17px; margin: 0 0 9px; color: var(--lf-muted); font-size: 10px; }
-    #law-feed-web-demo .news-card {
-      margin-bottom: 11px; padding: 15px 16px; border: 1px solid var(--lf-line);
-      border-radius: 16px; background: var(--lf-surface);
-    }
-    #law-feed-web-demo .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-    #law-feed-web-demo .match { color: var(--lf-accent); font-size: 10px; font-weight: 600; line-height: 1.5; }
-    #law-feed-web-demo .status {
-      flex: none; padding: 5px 8px; border-radius: 999px;
-      background: var(--lf-warm); color: var(--lf-warm-text); font-size: 9px; white-space: nowrap;
-    }
-    #law-feed-web-demo .news-title { margin: 8px 0 5px; font-size: 15px; line-height: 1.45; font-weight: 600; }
-    #law-feed-web-demo .summary { margin: 0; color: var(--lf-muted); font-size: 11px; line-height: 1.65; }
-    #law-feed-web-demo .reason { margin: 10px 0 10px; color: var(--lf-muted); font-size: 10px; line-height: 1.5; }
-    #law-feed-web-demo .reason strong { color: var(--lf-text); font-weight: 500; }
-    #law-feed-web-demo .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--lf-line); padding-top: 9px; color: var(--lf-muted); font-size: 9px; }
-    #law-feed-web-demo .source { display: flex; align-items: center; gap: 5px; min-width: 0; }
-    #law-feed-web-demo .source i { width: 12px; height: 12px; flex: none; }
-    #law-feed-web-demo .open-label { color: var(--lf-accent); white-space: nowrap; }
-    #law-feed-web-demo .right-rail { grid-column: 3; grid-row: 2; padding: 24px 16px; border-left: 1px solid var(--lf-line); }
-    #law-feed-web-demo .rail-section { margin-bottom: 17px; padding: 14px; border: 1px solid var(--lf-line); border-radius: 15px; background: var(--lf-surface); }
-    #law-feed-web-demo .rail-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px; font-weight: 600; }
-    #law-feed-web-demo .rail-head i { width: 16px; height: 16px; color: var(--lf-accent); }
-    #law-feed-web-demo .line-status { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; font-size: 11px; font-weight: 600; }
-    #law-feed-web-demo .connected-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lf-accent); }
-    #law-feed-web-demo .rail-copy { margin: 0 0 10px; color: var(--lf-muted); font-size: 10px; line-height: 1.6; }
-    #law-feed-web-demo .notify-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
-    #law-feed-web-demo .notify-topic { padding: 5px 7px; border-radius: 8px; background: var(--lf-accent-soft); color: var(--lf-accent); font-size: 9px; }
-    #law-feed-web-demo .rail-action {
-      width: 100%; min-height: 34px; border: 1px solid var(--lf-line); border-radius: 9px;
-      background: var(--lf-surface); color: var(--lf-text); font: inherit; font-size: 10px;
-    }
-    #law-feed-web-demo .reason-list { display: grid; gap: 9px; }
-    #law-feed-web-demo .reason-row { display: flex; align-items: flex-start; gap: 8px; color: var(--lf-muted); font-size: 10px; line-height: 1.5; }
-    #law-feed-web-demo .reason-row i { width: 13px; height: 13px; flex: none; color: var(--lf-accent); }
-    #law-feed-web-demo .agenda-row { display: flex; gap: 9px; padding: 8px 0; border-bottom: 1px solid var(--lf-line); }
-    #law-feed-web-demo .agenda-row:last-child { border-bottom: 0; padding-bottom: 0; }
-    #law-feed-web-demo .agenda-dot { width: 7px; height: 7px; flex: none; margin-top: 4px; border-radius: 50%; background: var(--lf-accent); }
-    #law-feed-web-demo .agenda-text { font-size: 10px; line-height: 1.5; }
-    #law-feed-web-demo .agenda-meta { display: block; margin-top: 2px; color: var(--lf-muted); font-size: 9px; }
-    @media (max-width: 900px) {
-      #law-feed-web-demo .app-shell { grid-template-columns: 176px minmax(0, 1fr); grid-template-rows: 66px auto auto; }
-      #law-feed-web-demo .sidebar { grid-row: 2 / span 2; }
-      #law-feed-web-demo .feed { grid-column: 2; grid-row: 2; padding: 24px 20px; }
-      #law-feed-web-demo .right-rail { grid-column: 2; grid-row: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0 20px 20px; border-left: 0; border-top: 1px solid var(--lf-line); }
-      #law-feed-web-demo .rail-section { margin: 12px 0 0; }
-    }
-    @media (max-width: 600px) {
-      #law-feed-web-demo { padding: 6px 0; }
-      #law-feed-web-demo .app-shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto; border-radius: 16px; }
-      #law-feed-web-demo .topbar { grid-column: 1; flex-wrap: wrap; gap: 10px; padding: 12px 15px; }
-      #law-feed-web-demo .topbar-right { gap: 7px; }
-      #law-feed-web-demo .account-chip { font-size: 10px; }
-      #law-feed-web-demo .sidebar { grid-column: 1; grid-row: 2; padding: 8px 10px; border-right: 0; border-bottom: 1px solid var(--lf-line); }
-      #law-feed-web-demo .side-label, #law-feed-web-demo .side-divider, #law-feed-web-demo .side-topics { display: none; }
-      #law-feed-web-demo .side-nav { display: flex; gap: 4px; overflow-x: auto; }
-      #law-feed-web-demo .nav-item { min-height: 38px; padding: 0 9px; gap: 6px; white-space: nowrap; font-size: 11px; }
-      #law-feed-web-demo .nav-item i { width: 15px; height: 15px; }
-      #law-feed-web-demo .feed { grid-column: 1; grid-row: 3; padding: 19px 14px 12px; }
-      #law-feed-web-demo .right-rail { grid-column: 1; grid-row: 4; grid-template-columns: minmax(0, 1fr); padding: 12px 14px 18px; border-top: 1px solid var(--lf-line); }
-      #law-feed-web-demo .rail-section { margin: 0; }
-      #law-feed-web-demo h1 { font-size: 21px; }
-    }
-  </style>
-
-  <div class="app-shell">
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M7 7l-4 7h8L7 7Zm10 0-4 7h8l-4-7ZM7 21h10"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-landmark" viewBox="0 0 24 24"><path d="m3 9 9-6 9 6M4 10h16M5 10v9m4-9v9m6-9v9m4-9v9M3 21h18M2 19h20"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 4.8A1.8 1.8 0 0 1 7.8 3h8.4A1.8 1.8 0 0 1 18 4.8V21l-6-4-6 4z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.7-2L20 12M4 12l2.7 5a7 7 0 0 0 11.7-2"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 7 6.6 4.4"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-2-5.8L4 11l6-2.2L12 3Zm7 12 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 2.9l-1.7 1.7M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.7-1.7"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></symbol>
+  </svg>
+  <div class="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark"><i data-lucide="scale" aria-hidden="true"></i></span><span>法訊雷達</span></div>
-      <div class="topbar-right">
-        <button class="icon-btn" type="button" aria-label="通知"><i data-lucide="bell" aria-hidden="true"></i></button>
-        <div class="account-chip"><span class="avatar">法</span><span>租屋族・學生打工</span></div>
+      <div class="brand"><span class="brand-mark"><svg><use href="#i-scale"/></svg></span><span>法訊雷達<small>LAW SIGNAL · YOUR DAILY BRIEF</small></span></div>
+      <label class="searchbox"><svg><use href="#i-search"/></svg><input id="search-input" type="search" placeholder="搜尋法案、議題或關鍵字" aria-label="搜尋法訊"></label>
+      <div class="top-actions">
+        <button class="icon-button" type="button" aria-label="查看通知" data-view="notifications"><svg><use href="#i-bell"/></svg><span class="unread"></span></button>
+        <button class="profile-button" type="button" data-view="settings"><span class="avatar">林</span><span class="profile-copy">我的法訊<span>租屋族・學生</span></span></button>
       </div>
     </header>
-
-    <aside class="sidebar" aria-label="主要導覽">
-      <p class="side-label">工作區</p>
-      <nav class="side-nav">
-        <div class="nav-item active"><i data-lucide="house" aria-hidden="true"></i><span>首頁推薦</span></div>
-        <div class="nav-item"><i data-lucide="landmark" aria-hidden="true"></i><span>立法院情報</span></div>
-        <div class="nav-item"><i data-lucide="messages-square" aria-hidden="true"></i><span>問法訊</span></div>
-        <div class="nav-item"><i data-lucide="bookmark" aria-hidden="true"></i><span>已收藏</span></div>
-      </nav>
-      <div class="side-divider"></div>
-      <p class="side-label">我的關注</p>
-      <div class="side-topics">
-        <div class="topic-link"><span class="topic-dot"></span><span>租屋權益</span></div>
-        <div class="topic-link"><span class="topic-dot"></span><span>學生打工</span></div>
-      </div>
-    </aside>
-
-    <main class="feed">
-      <p class="eyebrow">個人化法訊</p>
-      <h1>早安，這些法訊和你有關</h1>
-      <p class="subtitle">依照你的關注與近期法律動態，整理值得查看的更新。</p>
-      <div class="interest-row" aria-label="目前關注的身分與議題">
-        <span class="chip active">租屋族</span>
-        <span class="chip active">學生打工</span>
-        <span class="chip">＋ 編輯關注</span>
-      </div>
-
-      <div class="tabs" role="tablist" aria-label="法訊排序方式">
-        <button class="tab" id="tab-recommended" type="button" role="tab" aria-controls="feed-panel" aria-selected="true" data-feed-mode="recommended">為你推薦</button>
-        <button class="tab" id="tab-following" type="button" role="tab" aria-controls="feed-panel" aria-selected="false" data-feed-mode="following">我追蹤的</button>
-        <button class="tab" id="tab-latest" type="button" role="tab" aria-controls="feed-panel" aria-selected="false" data-feed-mode="latest">最新消息</button>
-      </div>
-      <div class="feed-toolbar">
-        <span class="feed-heading" id="feed-heading">今天為你整理</span>
-        <button class="refresh" id="feed-refresh" type="button"><i data-lucide="rotate-cw" aria-hidden="true"></i>更新推薦</button>
-      </div>
-      <div class="feed-note" id="feed-note" aria-live="polite">依關注身分、議題進度與新近程度排序</div>
-
-      <section id="feed-items" role="tabpanel" aria-labelledby="tab-recommended" aria-label="個人化消息">
-        <article class="news-card">
-          <div class="card-top"><span class="match">因你關注「租屋權益」</span><span class="status">委員會審查</span></div>
-          <h2 class="news-title">租屋議題出現新進度</h2>
-          <p class="summary">查看相關會議議程、討論摘要與目前法案狀態。</p>
-          <p class="reason"><strong>推薦原因</strong>　你追蹤租屋權益，且這則消息剛有進度更新。</p>
-          <div class="card-footer"><span class="source"><i data-lucide="landmark" aria-hidden="true"></i>立法院議事資料 · 示意消息</span><span class="open-label">查看進度 →</span></div>
-        </article>
-        <article class="news-card">
-          <div class="card-top"><span class="match">可能和「學生打工」有關</span><span class="status">會議議程</span></div>
-          <h2 class="news-title">本週勞動議題整理</h2>
-          <p class="summary">快速掌握討論主題，並查看資料來源與最新狀態。</p>
-          <p class="reason"><strong>推薦原因</strong>　符合你的關注標籤「學生打工」。</p>
-          <div class="card-footer"><span class="source"><i data-lucide="landmark" aria-hidden="true"></i>立法院議事資料 · 示意消息</span><span class="open-label">看摘要 →</span></div>
-        </article>
-      </section>
-    </main>
-
-    <aside class="right-rail" aria-label="個人化工具與提醒">
-      <section class="rail-section">
-        <div class="rail-head"><i data-lucide="message-circle" aria-hidden="true"></i><span>LINE 個人通知</span></div>
-        <div class="line-status"><span class="connected-dot"></span><span>官方帳號已連結（示意）</span></div>
-        <p class="rail-copy">依你的關注，把重要法案進度與議事更新傳到 LINE。</p>
-        <div class="notify-topics"><span class="notify-topic">租屋權益</span><span class="notify-topic">學生打工</span></div>
-        <button class="rail-action" type="button">管理通知偏好</button>
-      </section>
-
-      <section class="rail-section">
-        <div class="rail-head"><i data-lucide="sparkles" aria-hidden="true"></i><span>推薦依據</span></div>
-        <div class="reason-list">
-          <div class="reason-row"><i data-lucide="tags" aria-hidden="true"></i><span>你選擇的身分與關注議題</span></div>
-          <div class="reason-row"><i data-lucide="clock-3" aria-hidden="true"></i><span>最新進度、會議日期與時效</span></div>
-          <div class="reason-row"><i data-lucide="thumbs-up" aria-hidden="true"></i><span>你追蹤、收藏與回饋的內容</span></div>
-        </div>
-      </section>
-
-      <section class="rail-section">
-        <div class="rail-head"><i data-lucide="calendar-days" aria-hidden="true"></i><span>立法院會議情報</span></div>
-        <div class="agenda-row"><span class="agenda-dot"></span><div class="agenda-text">與你關注議題相關的會議<span class="agenda-meta">議程摘要 · 示意資訊</span></div></div>
-        <div class="agenda-row"><span class="agenda-dot"></span><div class="agenda-text">近期法案狀態更新<span class="agenda-meta">提案與審查進度 · 示意資訊</span></div></div>
-      </section>
-    </aside>
+    <div class="layout">
+      <aside class="sidebar" aria-label="主要導覽">
+        <p class="side-label">工作區</p>
+        <nav class="nav-list">
+          <button class="nav-link active" data-view="home"><svg><use href="#i-home"/></svg>首頁推薦</button>
+          <button class="nav-link" data-view="legislature"><svg><use href="#i-landmark"/></svg>立法院情報<span class="nav-count">3</span></button>
+          <button class="nav-link" data-view="chat"><svg><use href="#i-message"/></svg>問法訊</button>
+          <button class="nav-link" data-view="saved"><svg><use href="#i-bookmark"/></svg>已收藏<span class="nav-count saved-count" hidden>0</span></button>
+        </nav>
+        <div class="side-divider"></div>
+        <p class="side-label">我的關注</p>
+        <div class="topic-shortcuts" id="sidebar-topics"><div class="topic-shortcut"><span class="topic-color"></span>租屋權益</div><div class="topic-shortcut"><span class="topic-color"></span>學生打工</div><div class="topic-shortcut"><span class="topic-color"></span>消費者保護</div></div>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-note"><strong>資訊有依據，推薦看得懂</strong>每則法訊都會標示推薦原因、更新時間與資料來源。</div>
+      </aside>
+      <main class="main">
+        <section class="view active" id="view-home">
+          <div class="welcome">
+            <div class="eyebrow"><span class="sparkle">✳</span>你的個人化法訊</div>
+            <div class="welcome-row"><div><h1>早安，林同學</h1><p class="subcopy">今天有幾則新消息，可能和你的生活有關。</p></div><span class="date-label">週四・每日整理</span></div>
+            <div class="identity-row" id="identity-row"><span class="pill">租屋族</span><span class="pill">學生</span><span class="pill">學生打工</span><button class="pill add" data-open-interests><span>＋</span> 編輯關注</button></div>
+          </div>
+          <div class="feed-toolbar"><div class="tabs" role="tablist" aria-label="法訊資訊流"><button class="tab selected" data-feed="for-you" role="tab" aria-selected="true">為你推薦</button><button class="tab" data-feed="following" role="tab" aria-selected="false">我追蹤的</button><button class="tab" data-feed="latest" role="tab" aria-selected="false">最新消息</button></div><button class="refresh-button" id="refresh-feed"><svg><use href="#i-refresh"/></svg>換一批</button></div>
+          <div class="feed-caption"><strong id="feed-title">今天為你整理</strong><span id="feed-subtitle">依關注身分、相關程度與新近程度排列</span></div>
+          <div class="feed-list" id="feed-list"></div>
+          <p class="fine-print">原型畫面｜法訊標題、時間、會議及狀態均為介面示意，不代表真實法案或最新議程。</p>
+        </section>
+        <section class="view" id="view-legislature">
+          <div class="page-heading"><div class="eyebrow"><svg style="width:13px;height:13px"><use href="#i-landmark"/></svg>議事追蹤</div><h1>立法院情報</h1><p>把會議、議程與提案進度整理成好讀的重點。</p></div>
+          <div class="info-banner"><b>原型示意資料</b>　目前未串接立法院即時資料；正式版將顯示資料更新時間與官方來源連結。</div>
+          <section class="section-card"><div class="section-toolbar"><h2>近期會議</h2><select class="select-small" aria-label="會議類型"><option>全部會議</option><option>委員會</option><option>院會</option></select></div><div class="agenda-list">
+            <article class="agenda-line"><div class="agenda-datebox">11/18<span>週三・示意</span></div><div><h3>租賃與住宅相關議題｜委員會會議</h3><p>會議議程摘要尚待官方資料串接，關注議題：租屋權益。</p><span class="status-label">議程待確認</span></div></article>
+            <article class="agenda-line"><div class="agenda-datebox">11/20<span>週五・示意</span></div><div><h3>勞動權益相關議題｜委員會會議</h3><p>會議重點、提案清單與逐字紀錄將在正式版提供。</p><span class="status-label green">可能與你有關</span></div></article>
+            <article class="agenda-line"><div class="agenda-datebox">11/24<span>週二・示意</span></div><div><h3>消費者保護相關議題｜院會</h3><p>示意議程項目，用來呈現個人關注與會議的關聯。</p><span class="status-label">議程待確認</span></div></article>
+          </div></section>
+          <section class="section-card"><div class="section-toolbar"><h2>法案與政策進度</h2><select class="select-small" aria-label="進度篩選"><option>全部進度</option><option>審查中</option><option>已三讀</option></select></div><div class="bill-list">
+            <article class="bill-line"><span class="source-avatar"><svg><use href="#i-landmark"/></svg></span><div><h3>租屋權益相關提案（示意名稱）</h3><p>最近動態：委員會審查資訊待串接｜資料來源欄位會連至官方紀錄</p><span class="status-label">審查進度示意</span></div></article>
+            <article class="bill-line"><span class="source-avatar"><svg><use href="#i-landmark"/></svg></span><div><h3>勞動保障相關提案（示意名稱）</h3><p>最近動態：提案與會議紀錄待串接｜尚無即時資料</p><span class="status-label green">符合學生打工關注</span></div></article>
+          </div></section>
+        </section>
+        <section class="view" id="view-chat">
+          <div class="page-heading"><div class="eyebrow"><svg style="width:13px;height:13px"><use href="#i-sparkles"/></svg>有來源的法律資訊</div><h1>問法訊</h1><p>回答應附官方依據；資料不足時，會清楚告訴你目前無法確認。</p></div>
+          <div class="chat-wrap"><div class="chat-head"><span class="bot-icon"><svg><use href="#i-sparkles"/></svg></span><div><strong>法訊小幫手</strong><small>來源核對模式・原型示意</small></div></div><div class="chat-log" id="chat-log"><div class="chat-welcome"><b>你好，我可以幫你整理法規與議事資訊。</b>為了避免答錯，我會以可查證的官方資料回答，並附上來源。這個原型還沒有連接資料庫，以下互動只展示預期流程。<div class="prompt-row"><button class="prompt-chip">租屋相關提案目前有什麼進度？</button><button class="prompt-chip">回答會附上哪些資料來源？</button></div></div></div><form class="chat-compose" id="chat-form"><input id="chat-input" type="text" placeholder="輸入你的問題，例如：這則法訊和我有什麼關係？" autocomplete="off" aria-label="輸入問題"><button class="send-button" aria-label="送出問題"><svg><use href="#i-send"/></svg></button></form><div class="chat-disclaimer">原型示範不構成法律意見；實際答案需依官方資料、日期與個案情況確認。</div></div>
+        </section>
+        <section class="view" id="view-saved">
+          <div class="page-heading"><div class="eyebrow"><svg style="width:13px;height:13px"><use href="#i-bookmark"/></svg>稍後閱讀</div><h1>已收藏</h1><p>把重要法訊留在這裡，方便回來追蹤。</p></div><div id="saved-list"></div>
+        </section>
+        <section class="view" id="view-settings">
+          <div class="page-heading"><div class="eyebrow"><svg style="width:13px;height:13px"><use href="#i-check"/></svg>個人化設定</div><h1>我的法訊</h1><p>調整你關心的身分與主題，讓首頁推薦更貼近你的需要。</p></div>
+          <section class="section-card"><div class="section-toolbar"><h2>我的身分與關注</h2><button class="outline-button" style="width:auto;padding:0 12px" data-open-interests>編輯標籤</button></div><div class="identity-row" id="settings-tags" style="margin:5px 0 0"></div></section>
+          <section class="section-card"><h2>LINE 官方帳號通知</h2><p style="margin:5px 0 10px">連結後可將符合你關注標籤的重要更新傳到 LINE。此按鈕目前為互動示意，尚未連接 LINE API。</p><div class="switch-row"><span id="line-status-text">尚未連結 LINE 帳號</span><button class="outline-button" style="width:auto;padding:0 12px" id="connect-line">連結 LINE（示意）</button></div><div class="switch-row"><span>重要法案狀態更新</span><input type="checkbox" class="switch" checked aria-label="重要法案狀態更新通知"></div><div class="switch-row"><span>相關會議與議程提醒</span><input type="checkbox" class="switch" checked aria-label="相關會議提醒"></div><div class="switch-row"><span>每週法訊摘要</span><input type="checkbox" class="switch" aria-label="每週法訊摘要"></div></section>
+          <section class="section-card"><h2>推薦會參考哪些訊號？</h2><div class="settings-grid" style="margin-top:11px"><div class="setting-tile"><strong>我的身分與關注標籤</strong><span>你主動選擇要追蹤的生活情境與議題。</span></div><div class="setting-tile"><strong>消息的時間與進度</strong><span>新近更新、會議日期與議題狀態。</span></div><div class="setting-tile"><strong>我收藏與回饋的內容</strong><span>幫助調整排序，也能隨時管理收藏。</span></div><div class="setting-tile"><strong>清楚說明推薦原因</strong><span>每則推薦都展示與你相關的原因。</span></div></div></section>
+        </section>
+        <section class="view" id="view-notifications">
+          <div class="page-heading"><div class="eyebrow"><svg style="width:13px;height:13px"><use href="#i-bell"/></svg>通知中心</div><h1>你的法訊提醒</h1><p>重要更新會依你設定的關注標籤整理。</p></div><div class="section-card"><h2>最近通知</h2><div class="agenda-list"><article class="agenda-line"><span class="source-avatar"><svg><use href="#i-sparkles"/></svg></span><div><h3>有一則租屋相關法訊值得查看</h3><p>依你關注的「租屋權益」標籤整理｜示意通知</p><span class="status-label">原型訊息</span></div></article><article class="agenda-line"><span class="source-avatar"><svg><use href="#i-calendar"/></svg></span><div><h3>本週有與學生打工相關的議程更新</h3><p>會議與法案資訊待官方資料串接｜示意通知</p><span class="status-label">原型訊息</span></div></article></div></div><button class="outline-button" data-view="settings">管理通知偏好</button></section>
+      </main>
+      <aside class="rail" aria-label="法訊個人化資訊">
+        <section class="rail-card"><h2 class="rail-title"><span class="rail-icon"><svg><use href="#i-message"/></svg></span>LINE 個人通知</h2><div class="line-connected" id="rail-line-status"><span class="status-dot"></span>準備連結你的 LINE</div><p class="rail-copy">關注的重要法案進度與議事更新，可以直接傳到 LINE。</p><div class="notify-chips" id="rail-notify-chips"><span class="notify-chip">租屋權益</span><span class="notify-chip">學生打工</span></div><button class="outline-button" id="rail-line-button">連結 LINE 官方帳號</button></section>
+        <section class="rail-card"><h2 class="rail-title"><span class="rail-icon"><svg><use href="#i-calendar"/></svg></span>近期會議情報</h2><div class="agenda-item"><span class="agenda-dot"></span><div class="agenda-name">住宅與租賃議題<span class="agenda-date">11/18・委員會（示意）</span></div></div><div class="agenda-item"><span class="agenda-dot"></span><div class="agenda-name">勞動權益議題<span class="agenda-date">11/20・委員會（示意）</span></div></div><div class="rail-divider"></div><button class="text-action" data-view="legislature">查看全部會議情報　→</button></section>
+        <section class="rail-card"><h2 class="rail-title"><span class="rail-icon"><svg><use href="#i-sparkles"/></svg></span>這些內容為什麼出現？</h2><div class="reason-list"><div class="reason-item"><svg><use href="#i-check"/></svg><span>符合你選擇的身分與關注議題</span></div><div class="reason-item"><svg><use href="#i-clock"/></svg><span>留意消息更新時間與議事進度</span></div><div class="reason-item"><svg><use href="#i-bookmark"/></svg><span>參考收藏和明確回饋調整排序</span></div></div></section>
+        <p class="fine-print">本頁為功能原型。會議、法案、通知與 LINE 連結狀態皆為示意。</p>
+      </aside>
+    </div>
+    <nav class="mobile-bottom" aria-label="手機版導覽"><button class="active" data-view="home"><svg><use href="#i-home"/></svg>首頁</button><button data-view="legislature"><svg><use href="#i-landmark"/></svg>議事</button><button data-view="chat"><svg><use href="#i-message"/></svg>問法訊</button><button data-view="saved"><svg><use href="#i-bookmark"/></svg>收藏</button><button data-view="settings"><svg><use href="#i-check"/></svg>我的</button></nav>
   </div>
-
+  <div class="modal-backdrop" id="interest-modal" role="dialog" aria-modal="true" aria-labelledby="interest-title"><div class="modal"><div class="modal-top"><div><h2 id="interest-title">編輯你的關注</h2><p>選擇與你相關的身分和主題，首頁會依此調整推薦。設定只儲存在這台裝置。</p></div><button class="modal-close" data-close-modal aria-label="關閉"><svg><use href="#i-x"/></svg></button></div><div class="option-group"><h3>我的身分</h3><div class="option-grid" data-group="identity"><button class="option-chip selected">租屋族</button><button class="option-chip selected">學生</button><button class="option-chip">勞工</button><button class="option-chip">新手爸媽</button><button class="option-chip">小型商家</button><button class="option-chip">照顧者</button></div></div><div class="option-group"><h3>我關注的議題</h3><div class="option-grid" data-group="topics"><button class="option-chip selected">租屋權益</button><button class="option-chip selected">學生打工</button><button class="option-chip selected">消費者保護</button><button class="option-chip">勞動保障</button><button class="option-chip">個資與數位權益</button><button class="option-chip">交通安全</button></div></div><div class="modal-footer"><button class="outline-button" data-close-modal>取消</button><button class="solid-button" id="save-interests">儲存設定</button></div></div></div>
+  <div class="modal-backdrop" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title"><div class="modal"><div class="modal-top"><div><h2 id="detail-title">法訊詳細內容</h2><p id="detail-desc"></p></div><button class="modal-close" data-close-modal aria-label="關閉"><svg><use href="#i-x"/></svg></button></div><div class="detail-source" id="detail-source"></div><div class="modal-footer"><button class="outline-button" data-close-modal>關閉</button><button class="solid-button" id="detail-save">收藏這則法訊</button></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
-    const root = document.getElementById("law-feed-web-demo");
-    const feedCards = Array.from(root.querySelectorAll(".news-card"));
-    const feedTabs = Array.from(root.querySelectorAll("[data-feed-mode]"));
-    const feedHeading = root.querySelector("#feed-heading");
-    const feedNote = root.querySelector("#feed-note");
-    let activeMode = "recommended";
-    let refreshIndex = 0;
-
-    const feeds = {
-      recommended: {
-        heading: "今天為你整理",
-        note: "依關注身分、議題進度與新近程度排序",
-        cards: [
-          [
-            ["因你關注「租屋權益」", "委員會審查", "租屋議題出現新進度", "查看相關會議議程、討論摘要與目前法案狀態。", "你追蹤租屋權益，且這則消息剛有進度更新。", "立法院議事資料 · 示意消息", "查看進度 →"],
-            ["可能和「學生打工」有關", "會議議程", "本週勞動議題整理", "快速掌握討論主題，並查看資料來源與最新狀態。", "符合你的關注標籤「學生打工」。", "立法院議事資料 · 示意消息", "看摘要 →"]
-          ],
-          [
-            ["可能和「學生打工」有關", "最新資料", "打工族關注議題有新資料", "整理相關議題進度，附會議摘要與可追溯來源。", "你關注學生打工，且最近閱讀過勞動議題。", "立法院議事資料 · 示意消息", "查看進度 →"],
-            ["因你關注「租屋權益」", "近期討論", "租屋相關會議重點整理", "查看會議討論主題，以及提案目前進行到哪個階段。", "符合你的租屋關注，且近期有相關會議。", "立法院議事資料 · 示意消息", "看摘要 →"]
-          ]
-        ]
-      },
-      following: {
-        heading: "你追蹤的議題",
-        note: "只顯示你主動追蹤的身分與議題",
-        cards: [[
-          ["你追蹤的「租屋權益」", "進度更新", "租屋議題出現新進度", "查看相關會議議程、討論摘要與目前法案狀態。", "這是你主動追蹤的議題。", "立法院議事資料 · 示意消息", "查看進度 →"],
-          ["你追蹤的「學生打工」", "會議議程", "本週勞動議題整理", "快速掌握討論主題，並查看資料來源與最新狀態。", "這是你主動追蹤的議題。", "立法院議事資料 · 示意消息", "看摘要 →"]
-        ]]
-      },
-      latest: {
-        heading: "最新法訊",
-        note: "按發布時間排列，保留與你的標籤關聯提示",
-        cards: [[
-          ["最新發布 · 可能和你有關", "最新消息", "近期立法院議程整理", "查看最新議程摘要，確認議題、會議與官方資料。", "其中部分內容與你追蹤的議題相符。", "立法院議事資料 · 示意消息", "看摘要 →"],
-          ["最新發布 · 租屋權益", "狀態更新", "相關提案狀態有更新", "查看提案目前進度，以及會議資料與來源。", "你追蹤了租屋權益。", "立法院議事資料 · 示意消息", "查看進度 →"]
-        ]]
-      }
-    };
-
-    function renderFeed() {
-      const feed = feeds[activeMode];
-      const items = feed.cards[refreshIndex % feed.cards.length];
-      feedHeading.textContent = feed.heading;
-      feedNote.textContent = feed.note;
-      feedCards.forEach((card, index) => {
-        const item = items[index];
-        card.querySelector(".match").textContent = item[0];
-        card.querySelector(".status").textContent = item[1];
-        card.querySelector(".news-title").textContent = item[2];
-        card.querySelector(".summary").textContent = item[3];
-        card.querySelector(".reason").innerHTML = "<strong>推薦原因</strong>　" + item[4];
-        card.querySelector(".source").lastChild.textContent = item[5];
-        card.querySelector(".open-label").textContent = item[6];
-      });
-    }
-
-    function syncTabs() {
-      feedTabs.forEach((tab) => tab.setAttribute("aria-selected", String(tab.dataset.feedMode === activeMode)));
-      root.querySelector("#feed-items").setAttribute("aria-labelledby", "tab-" + activeMode);
-    }
-
-    function restoreState(state) {
-      const model = state && state.modelContent;
-      if (!model || typeof model !== "object") return;
-      if (feeds[model.activeMode]) activeMode = model.activeMode;
-      if (Number.isInteger(model.refreshIndex) && model.refreshIndex >= 0) refreshIndex = model.refreshIndex;
-      syncTabs();
-      renderFeed();
-    }
-
-    function saveState() {
-      if (window.openai && typeof window.openai.setWidgetState === "function") {
-        window.openai.setWidgetState({
-          modelContent: { activeMode, refreshIndex },
-          privateContent: null
-        }).catch(() => {});
-      }
-    }
-
-    feedTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        activeMode = tab.dataset.feedMode;
-        refreshIndex = 0;
-        syncTabs();
-        renderFeed();
-        saveState();
-      });
-    });
-
-    root.querySelector("#feed-refresh").addEventListener("click", () => {
-      refreshIndex += 1;
-      renderFeed();
-      feedNote.textContent = "已重新整理：" + feeds[activeMode].note;
-      saveState();
-    });
-    renderFeed();
-    if (window.openai && window.openai.widgetState) restoreState(window.openai.widgetState);
-    window.addEventListener("openai:set_globals", (event) => {
-      const state = event.detail && event.detail.globals && event.detail.globals.widgetState;
-      if (state) restoreState(state);
-    });
+    const stories=[
+      {id:"rent",category:"租屋權益",source:"立法院議事資料・示意",time:"約 20 分鐘前・示意",tag:"審查進度示意",title:"租屋相關議題出現新進度",summary:"整理近期與租屋權益相關的提案與會議資訊，讓你快速掌握議題目前走到哪裡。正式版會附官方議程、提案紀錄與更新日期。",reason:"你追蹤「租屋權益」，這則議題有新的進度欄位更新。",score:98,kind:"議事追蹤",hero:true},
+      {id:"work",category:"學生打工",source:"立法院議事資料・示意",time:"今天 09:10・示意",tag:"會議議程示意",title:"本週勞動議題會議重點整理",summary:"快速看懂相關會議預計討論什麼、哪些資料仍待確認，以及後續可以追蹤的進度。",reason:"符合你的「學生」身分與「學生打工」關注標籤。",score:88,kind:"會議情報"},
+      {id:"consumer",category:"消費者保護",source:"官方資料來源待串接",time:"昨天・示意",tag:"政策更新示意",title:"消費者權益相關政策資訊更新",summary:"原型示範如何彙整政策說明、適用情境與官方問答來源；正式內容會保留原始連結。",reason:"你追蹤「消費者保護」，且這則內容有近期更新。",score:72,kind:"政策法訊"},
+      {id:"privacy",category:"個資與數位權益",source:"資料來源待串接",time:"11/11・示意",tag:"延伸閱讀示意",title:"個人資料使用議題：可以先看哪些官方說明？",summary:"整理主管機關公開說明與常見問題，方便你從原始資料確認細節。",reason:"此議題與你常閱讀的數位權益主題相近。",score:58,kind:"官方說明"}
+    ];
+    const feedModes={"for-you":{title:"今天為你整理",subtitle:"依關注身分、相關程度與新近程度排列"},following:{title:"你追蹤的議題",subtitle:"只顯示你主動追蹤的身分與議題"},latest:{title:"最新法訊",subtitle:"依消息時間排列，保留與你的標籤關聯提示"}};
+    const saved=new Set(JSON.parse(localStorage.getItem("lawradar-saved")||"[]"));
+    const defaults={identity:["租屋族","學生"],topics:["租屋權益","學生打工","消費者保護"]};
+    let interests=JSON.parse(localStorage.getItem("lawradar-interests")||"null")||defaults;
+    let activeFeed="for-you",refresh=0,lineConnected=localStorage.getItem("lawradar-line")==="yes",detailStory=null,toastTimer;
+    const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+    const icon=(name)=>`<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
+    function esc(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+    function showToast(message){const el=$("#toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2400)}
+    function renderStories(items,target){target.innerHTML=items.map(s=>`<article class="story" data-story="${s.id}"><div class="story-top"><span class="source-avatar">${icon("landmark")}</span><span class="source-name">${esc(s.kind)}</span><span class="story-time">· ${esc(s.time)}</span><span class="story-tag">${esc(s.tag)}</span></div>${s.hero?`<div class="story-hero"><span class="hero-label">LAW SIGNAL · ISSUE TRACKER</span><span class="hero-title">租屋議題進度追蹤</span><span class="hero-mark">${icon("landmark")}</span></div>`:""}<h2 class="story-title">${esc(s.title)}</h2><p class="story-summary">${esc(s.summary)}</p><div class="relevance"><b>為你推薦</b><span>${esc(s.reason)}</span></div><div class="story-meta"><span class="source-meta">${icon("link")}<span>${esc(s.source)}</span></span><span class="story-actions"><button class="text-action ${saved.has(s.id)?"saved":""}" data-save="${s.id}" aria-label="${saved.has(s.id)?"取消收藏":"收藏"}">${icon("bookmark")}${saved.has(s.id)?"已收藏":"收藏"}</button><button class="text-action" data-detail="${s.id}">查看詳情 ${icon("share")}</button></span></div></article>`).join("");}
+    function filteredStories(){let list=[...stories];if(activeFeed==="following")list=list.filter(s=>interests.topics.includes(s.category)||s.category==="學生打工");if(activeFeed==="latest")list.reverse();else if(activeFeed==="for-you")list.sort((a,b)=>b.score-a.score);if(refresh%2)list=list.slice(1).concat(list.slice(0,1));const q=$("#search-input").value.trim().toLowerCase();if(q)list=list.filter(s=>(s.title+s.summary+s.category+s.kind).toLowerCase().includes(q));return list}
+    function renderFeed(){renderStories(filteredStories(),$("#feed-list"));$("#feed-title").textContent=feedModes[activeFeed].title;$("#feed-subtitle").textContent=feedModes[activeFeed].subtitle}
+    function updateSavedCount(){const badge=$(".saved-count");badge.hidden=!saved.size;badge.textContent=saved.size;localStorage.setItem("lawradar-saved",JSON.stringify([...saved]))}
+    function renderSaved(){const target=$("#saved-list"),items=stories.filter(s=>saved.has(s.id));if(!items.length){target.innerHTML=`<div class="saved-empty">${icon("bookmark")}<strong>還沒有收藏法訊</strong><p>在首頁點選「收藏」，重要內容就會留在這裡。</p></div>`;return}renderStories(items,target)}
+    function updateInterests(){const all=[...interests.identity,...interests.topics];$("#identity-row").innerHTML=all.map(t=>`<span class="pill">${esc(t)}</span>`).join("")+`<button class="pill add" data-open-interests><span>＋</span> 編輯關注</button>`;$("#settings-tags").innerHTML=all.map(t=>`<span class="pill">${esc(t)}</span>`).join("");$("#sidebar-topics").innerHTML=(interests.topics.length?interests.topics:["尚未選擇議題"]).slice(0,4).map(t=>`<div class="topic-shortcut"><span class="topic-color"></span>${esc(t)}</div>`).join("");$("#rail-notify-chips").innerHTML=(interests.topics.length?interests.topics:["尚未選擇議題"]).slice(0,3).map(t=>`<span class="notify-chip">${esc(t)}</span>`).join("");localStorage.setItem("lawradar-interests",JSON.stringify(interests));renderFeed()}
+    function renderLine(){const status=$("#rail-line-status"),button=$("#rail-line-button"),setting=$("#line-status-text");status.innerHTML=`<span class="status-dot" style="${lineConnected?"background:#5da66e":"background:#d8a85b"}"></span>${lineConnected?"LINE 官方帳號已連結（示意）":"準備連結你的 LINE"}`;button.textContent=lineConnected?"管理 LINE 通知偏好":"連結 LINE 官方帳號";setting.textContent=lineConnected?"LINE 官方帳號已連結（示意）":"尚未連結 LINE 帳號";$("#connect-line").textContent=lineConnected?"解除連結（示意）":"連結 LINE（示意）"}
+    function showView(name){const view=$("#view-"+name);if(!view)return;$$(".view").forEach(v=>v.classList.toggle("active",v===view));$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===name));if(name==="saved")renderSaved();window.scrollTo({top:0,behavior:"smooth"})}
+    function openInterestModal(){const modal=$("#interest-modal");$$(".option-chip",modal).forEach(b=>{const arr=b.closest("[data-group]").dataset.group==="identity"?interests.identity:interests.topics;b.classList.toggle("selected",arr.includes(b.textContent.trim()))});modal.classList.add("open")}
+    function toggleLine(){lineConnected=!lineConnected;localStorage.setItem("lawradar-line",lineConnected?"yes":"no");renderLine();showToast(lineConnected?"已切換為 LINE 已連結示意狀態":"已切換為尚未連結示意狀態")}
+    function openDetails(id){detailStory=stories.find(s=>s.id===id);if(!detailStory)return;$("#detail-title").textContent=detailStory.title;$("#detail-desc").textContent=detailStory.summary;$("#detail-source").innerHTML=`<b>推薦原因：</b>${esc(detailStory.reason)}<br><b>資料來源：</b>${esc(detailStory.source)}<br><b>更新時間：</b>${esc(detailStory.time)}<br><br>正式版會連結至原始官方紀錄，並顯示資料更新時間。這裡的議題與狀態文字皆為原型示意。`;$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";$("#detail-modal").classList.add("open")}
+    function sendChat(text){const log=$("#chat-log"),q=text.trim();if(!q)return;const user=document.createElement("div");user.className="chat-message";user.textContent=q;log.append(user);const answer=document.createElement("div");answer.className="chat-answer";const known=q.includes("來源")||q.includes("依據");answer.innerHTML=known?"正式版預計優先引用立法院議事資料、全國法規資料庫及主管機關公告，並附上原始連結與資料日期。這個原型沒有連接資料庫，因此目前不能提供已核實的法規答案。<span class=\"answer-source\">來源策略示意｜正式版需顯示實際文件名稱、發布機關、日期與連結</span>":"我目前沒有連接官方法規或議事資料，無法核實這個議題的實際規定或最新進度。為了避免提供錯誤答案，這裡先不推測。正式版會先查找官方來源，再附上文件、條文或會議紀錄；若找不到可靠依據，會明確說明無法確認。<span class=\"answer-source\">目前狀態：尚未查詢官方資料｜回答示意，不是法律意見</span>";log.append(answer);$("#chat-input").value="";log.scrollTop=log.scrollHeight}
+    document.addEventListener("click",e=>{const nav=e.target.closest("[data-view]");if(nav){showView(nav.dataset.view);return}const open=e.target.closest("[data-open-interests]");if(open){openInterestModal();return}const close=e.target.closest("[data-close-modal]");if(close){e.target.closest(".modal-backdrop").classList.remove("open");return}const option=e.target.closest(".option-chip");if(option){option.classList.toggle("selected");return}const save=e.target.closest("[data-save]");if(save){const id=save.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);updateSavedCount();renderFeed();renderSaved();if(detailStory?.id===id)$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";showToast(saved.has(id)?"已加入收藏":"已取消收藏");return}const detail=e.target.closest("[data-detail]");if(detail){openDetails(detail.dataset.detail);return}const tab=e.target.closest("[data-feed]");if(tab){activeFeed=tab.dataset.feed;refresh=0;$$("[data-feed]").forEach(b=>{b.classList.toggle("selected",b===tab);b.setAttribute("aria-selected",String(b===tab))});renderFeed();return}const prompt=e.target.closest(".prompt-chip");if(prompt){sendChat(prompt.textContent);return}});
+    $("#save-interests").addEventListener("click",()=>{const modal=$("#interest-modal");interests={identity:$$('[data-group="identity"] .option-chip.selected',modal).map(b=>b.textContent.trim()),topics:$$('[data-group="topics"] .option-chip.selected',modal).map(b=>b.textContent.trim())};updateInterests();modal.classList.remove("open");showToast("關注設定已儲存")});
+    $("#refresh-feed").addEventListener("click",()=>{refresh++;renderFeed();showToast("已依你的關注更新推薦")});
+    $("#search-input").addEventListener("input",()=>{if(!$("#view-home").classList.contains("active"))showView("home");renderFeed()});
+    $("#rail-line-button").addEventListener("click",()=>lineConnected?showView("settings"):toggleLine());$("#connect-line").addEventListener("click",toggleLine);
+    $("#detail-save").addEventListener("click",()=>{if(!detailStory)return;const id=detailStory.id;saved.has(id)?saved.delete(id):saved.add(id);updateSavedCount();renderFeed();renderSaved();$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";showToast(saved.has(id)?"已加入收藏":"已取消收藏")});
+    $("#chat-form").addEventListener("submit",e=>{e.preventDefault();sendChat($("#chat-input").value)});
+    $$(".modal-backdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));document.addEventListener("keydown",e=>{if(e.key==="Escape")$$(".modal-backdrop.open").forEach(m=>m.classList.remove("open"))});
+    updateInterests();updateSavedCount();renderLine();renderFeed();
   </script>
-</div>
 </body>
 </html>
+
