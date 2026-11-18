@@ -7,6 +7,7 @@
 ## 專案文件
 
 - [計畫書草案](docs/計畫書草案.md)：競賽提案、產品構想、AI 使用方式、資料與風險控管、時程。
+- [共用資料契約 v1.0.0](docs/資料契約.md)：NewsItem 欄位、法律狀態、來源核對與問答／通知使用規則。
 - [團隊分工與 GitHub 協作](docs/團隊分工與GitHub協作.md)：A–E 分工、共用資料格式、Issue 順序、驗收方式與每日同步規則。
 - [網頁原型](prototype/index.html)：可直接用瀏覽器開啟的互動式 Web Demo，包含個人化資訊流、立法院情報、來源導向問答、收藏、關注設定與 LINE 通知示意。
 - [開工通知草稿](docs/開工通知.md)：可直接轉發給組員的開工訊息與 Issue 一覽。
@@ -29,4 +30,5 @@
 ## GitHub 工作方式
 
 目前以 [GitHub Issues 任務列表](https://github.com/yang-yang1211/law_tec/issues)追蹤 P-01–P-10。Issue 內標明負責成員、交付物、截止日與驗收條件；成員帳號確認後再加上實際 assignee。PR 和日常同步規則見 [團隊分工與 GitHub 協作](docs/團隊分工與GitHub協作.md)。
+
 
