@@ -55,30 +55,7 @@
 
 ## 共用資料契約
 
-跨模組使用 [NewsItem 資料契約 v1.0.0](https://github.com/yang-yang1211/law_tec/blob/docs/team-workplan-kickoff/docs/資料契約.md)，唯一共用 fixture 為 data/fixtures/news-items.v1.json。欄位、狀態、日期與核對規則以該文件為準；不要另造欄位或複製不同版本的資料。
-
-
-
-跨模組先使用以下欄位名稱；要新增欄位時先在此 Issue／文件提出，避免各自使用不同名稱。
-
-```json
-{
-  "id": "demo-001",
-  "title": "示意法訊標題",
-  "summary": "淺白摘要",
-  "topicTags": ["租屋權益"],
-  "audienceTags": ["租屋族"],
-  "status": "審議中",
-  "publishedAt": "2026-11-12T08:00:00+08:00",
-  "updatedAt": "2026-11-12T09:00:00+08:00",
-  "sourceName": "官方資料來源",
-  "sourceUrl": "https://example.gov.tw/",
-  "meetingDate": null,
-  "notificationLevel": "重要更新"
-}
-```
-
-以上只供介面串接示意。不得把 `example.gov.tw` 當正式來源。
+跨模組使用 [NewsItem 資料契約 v1.0.0](https://github.com/yang-yang1211/law_tec/blob/docs/team-workplan-kickoff/docs/資料契約.md)，唯一共用 fixture 為 `data/fixtures/news-items.v1.json`。欄位、狀態、日期與核對規則以契約文件為準；本文件不重複貼欄位範例，以免出現不同版本。新增欄位前先提出並由 A 確認。
 
 ##  GitHub Issues 
 
