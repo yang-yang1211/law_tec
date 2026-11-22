@@ -9,8 +9,8 @@
 - [計畫書草案](docs/計畫書草案.md)：競賽提案、產品構想、AI 使用方式、資料與風險控管、時程。
 - [共用資料契約 v1.0.0](docs/資料契約.md)：NewsItem 欄位、法律狀態、來源核對與問答／通知使用規則。
 - [團隊分工與 GitHub 協作](docs/團隊分工與GitHub協作.md)：A–E 分工、共用資料格式、Issue 順序、驗收方式與每日同步規則。
-- [網頁架構](prototype/index.html)：模組化頁面骨架，含首頁、議事追蹤、問答、收藏、通知與設定區。
-- [互動式原型 Demo](prototype/demo.html)：原本的互動式 Web Demo，保留個人化資訊流與示意操作。
+- [互動式原型 Demo](prototype/index.html)：可直接開啟的個人化資訊流與示意操作。
+- [模組化頁面骨架](prototype/layout.html)：後續功能模組的導覽與版面骨架。
 - [開工通知草稿](docs/開工通知.md)：可直接轉發給組員的開工訊息與 Issue 一覽。
 - [競賽簡章](NextWave_AI法創黑客松_簡章.pdf)：競賽規則、時程與評分標準。
 
