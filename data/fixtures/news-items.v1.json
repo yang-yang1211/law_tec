@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "items": [
+    {
+      "id": "demo-rent-001",
+      "recordType": "bill",
+      "title": "示意法訊：租屋相關提案（虛構）",
+      "summary": "此筆僅測試欄位呈現，不代表真實提案或法律資訊。",
+      "topicTags": ["租屋權益"],
+      "audienceTags": ["租屋族", "學生"],
+      "billStage": "unknown",
+      "legalEffect": "unknown",
+      "sourceStatusText": null,
+      "meetingStatus": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "meetingDate": null,
+      "source": {
+        "organization": "示意資料",
+        "documentTitle": null,
+        "url": null,
+        "publishedAt": null,
+        "accessedAt": null,
+        "citationLocator": null
+      },
+      "sourceExcerpt": null,
+      "verificationStatus": "pending",
+      "verifiedAt": null,
+      "verifiedBy": null,
+      "notificationLevel": "none"
+    }
+  ]
+}
+
