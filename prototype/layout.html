@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7f4">
+  <title>法訊雷達｜網站架構</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#/home" aria-label="法訊雷達首頁">
+        <span class="brand-mark" aria-hidden="true">法</span>
+        <span class="brand-name">法訊雷達<small>LAW SIGNAL</small></span>
+      </a>
+      <label class="searchbox">
+        <span aria-hidden="true">⌕</span>
+        <input type="search" placeholder="搜尋法訊、議題或來源" aria-label="搜尋">
+      </label>
+      <div class="top-actions">
+        <button class="icon-button" type="button" data-page="notifications" aria-label="通知">♧</button>
+        <button class="profile-button" type="button" data-page="settings"><span class="avatar">我</span><span class="profile-label">個人設定</span></button>
+      </div>
+    </header>
+
+    <div class="app-layout">
+      <aside class="sidebar" aria-label="主要導覽">
+        <p class="side-label">工作空間</p>
+        <nav id="primary-navigation" class="nav-list"></nav>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-note"><span class="note-mark" aria-hidden="true">i</span><span>網站介面骨架<br>功能與資料待後續接入</span></div>
+      </aside>
+
+      <main id="page-content" class="main" tabindex="-1" aria-live="polite"></main>
+
+      <aside id="context-rail" class="context-rail" aria-label="側邊資訊模組"></aside>
+    </div>
+
+    <nav id="mobile-navigation" class="mobile-navigation" aria-label="手機版導覽"></nav>
+  </div>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
