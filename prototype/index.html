@@ -12,6 +12,7 @@
     @media(max-width:1000px){.layout{grid-template-columns:190px minmax(0,680px);max-width:920px}.rail{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:0}.rail-card{margin:0}.fine-print{grid-column:1/-1}.brand{width:190px}}
     @media(max-width:680px){.topbar{height:60px;padding:0 14px;gap:10px}.brand{width:auto;min-width:0;font-size:14px}.brand-mark{width:33px;height:33px}.brand small{display:none}.searchbox{display:none}.top-actions{gap:6px}.profile-copy{display:none}.profile-button{padding:0 0 0 2px}.icon-button{width:35px;height:35px}.layout{display:block;padding:18px 13px 82px}.sidebar{display:none}.main{width:100%}.welcome h1{font-size:22px}.welcome-row{align-items:flex-start}.date-label{display:none}.identity-row{margin:14px 0 15px}.tabs{gap:17px}.tab{font-size:10px}.story{padding:14px 13px 12px}.story-title{font-size:14px}.story-summary{font-size:10px}.story-actions{gap:8px}.rail{display:grid;grid-template-columns:1fr;margin-top:15px}.rail-card{padding:14px}.mobile-bottom{position:fixed;bottom:0;left:0;right:0;height:61px;padding:5px 12px max(5px,env(safe-area-inset-bottom));display:flex;justify-content:space-around;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:25}.mobile-bottom button{border:0;background:transparent;color:#869189;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:57px;font-size:8px}.mobile-bottom button.active{color:var(--green);font-weight:700}.mobile-bottom svg{width:18px;height:18px}.page-heading h1{font-size:21px}.settings-grid{grid-template-columns:1fr}.chat-wrap{min-height:calc(100vh - 210px)}.story-hero{height:105px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+    .pending-badge{display:inline-block;margin-top:10px;padding:4px 8px;border-radius:6px;background:#fdf1e7;color:#a5622f;font-size:9px;font-weight:700}.story-top{flex-wrap:wrap}.source-meta a{color:var(--green)}.empty-action{width:auto;margin-top:12px;padding:0 14px}
   </style>
 </head>
 <body>
@@ -112,14 +113,14 @@
   <div class="modal-backdrop" id="interest-modal" role="dialog" aria-modal="true" aria-labelledby="interest-title"><div class="modal"><div class="modal-top"><div><h2 id="interest-title">編輯你的關注</h2><p>選擇與你相關的身分和主題，首頁會依此調整推薦。設定只儲存在這台裝置。</p></div><button class="modal-close" data-close-modal aria-label="關閉"><svg><use href="#i-x"/></svg></button></div><div class="option-group"><h3>我的身分</h3><div class="option-grid" data-group="identity"><button class="option-chip selected">租屋族</button><button class="option-chip selected">學生</button><button class="option-chip">勞工</button><button class="option-chip">新手爸媽</button><button class="option-chip">小型商家</button><button class="option-chip">照顧者</button></div></div><div class="option-group"><h3>我關注的議題</h3><div class="option-grid" data-group="topics"><button class="option-chip selected">租屋權益</button><button class="option-chip selected">學生打工</button><button class="option-chip selected">消費者保護</button><button class="option-chip">勞動保障</button><button class="option-chip">個資與數位權益</button><button class="option-chip">交通安全</button></div></div><div class="modal-footer"><button class="outline-button" data-close-modal>取消</button><button class="solid-button" id="save-interests">儲存設定</button></div></div></div>
   <div class="modal-backdrop" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title"><div class="modal"><div class="modal-top"><div><h2 id="detail-title">法訊詳細內容</h2><p id="detail-desc"></p></div><button class="modal-close" data-close-modal aria-label="關閉"><svg><use href="#i-x"/></svg></button></div><div class="detail-source" id="detail-source"></div><div class="modal-footer"><button class="outline-button" data-close-modal>關閉</button><button class="solid-button" id="detail-save">收藏這則法訊</button></div></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="demo-items.js"></script>
+  <script src="recommendation.js"></script>
   <script>
-    const stories=[
-      {id:"rent",category:"租屋權益",source:"立法院議事資料・示意",time:"約 20 分鐘前・示意",tag:"審查進度示意",title:"租屋相關議題出現新進度",summary:"整理近期與租屋權益相關的提案與會議資訊，讓你快速掌握議題目前走到哪裡。正式版會附官方議程、提案紀錄與更新日期。",reason:"你追蹤「租屋權益」，這則議題有新的進度欄位更新。",score:98,kind:"議事追蹤",hero:true},
-      {id:"work",category:"學生打工",source:"立法院議事資料・示意",time:"今天 09:10・示意",tag:"會議議程示意",title:"本週勞動議題會議重點整理",summary:"快速看懂相關會議預計討論什麼、哪些資料仍待確認，以及後續可以追蹤的進度。",reason:"符合你的「學生」身分與「學生打工」關注標籤。",score:88,kind:"會議情報"},
-      {id:"consumer",category:"消費者保護",source:"官方資料來源待串接",time:"昨天・示意",tag:"政策更新示意",title:"消費者權益相關政策資訊更新",summary:"原型示範如何彙整政策說明、適用情境與官方問答來源；正式內容會保留原始連結。",reason:"你追蹤「消費者保護」，且這則內容有近期更新。",score:72,kind:"政策法訊"},
-      {id:"privacy",category:"個資與數位權益",source:"資料來源待串接",time:"11/11・示意",tag:"延伸閱讀示意",title:"個人資料使用議題：可以先看哪些官方說明？",summary:"整理主管機關公開說明與常見問題，方便你從原始資料確認細節。",reason:"此議題與你常閱讀的數位權益主題相近。",score:58,kind:"官方說明"}
-    ];
-    const feedModes={"for-you":{title:"今天為你整理",subtitle:"依關注身分、相關程度與新近程度排列"},following:{title:"你追蹤的議題",subtitle:"只顯示你主動追蹤的身分與議題"},latest:{title:"最新法訊",subtitle:"依消息時間排列，保留與你的標籤關聯提示"}};
+    const newsItems=window.DEMO_NEWS_ITEMS||[];
+    const RECORD_TYPES={bill:"法案",meeting:"會議",regulation:"法規",official_notice:"官方公告"};
+    const BILL_STAGES={proposed:"已提出",first_reading:"一讀／交付審查",committee_review:"委員會審查",party_negotiation:"黨團協商",second_reading:"二讀",third_reading_passed:"三讀通過",executive_reconsideration:"覆議程序",legislative_reconsideration:"復議程序",rejected:"未通過／不予審議",withdrawn:"撤回",unknown:"狀態待核"};
+    const LEGAL_EFFECTS={not_promulgated:"尚未公布",promulgated_effective_date_pending:"已公布，施行日待確認",effective:"已施行",repealed_or_expired:"已廢止／失效",unknown:"效力待核",not_applicable:"不適用"};
+    const MEETING_STATUS={scheduled:"已排定",held:"已舉行",postponed:"延期",cancelled:"取消",unknown:"待核"};    const feedModes={"for-you":{title:"今天為你整理",subtitle:"依關注議題、身分與新近程度排列"},following:{title:"你追蹤的議題",subtitle:"只顯示符合你議題或身分標籤的內容，依更新時間排列"},latest:{title:"最新法訊",subtitle:"依更新時間排列，沒有日期的排最後"}};
     const saved=new Set(JSON.parse(localStorage.getItem("lawradar-saved")||"[]"));
     const defaults={identity:["租屋族","學生"],topics:["租屋權益","學生打工","消費者保護"]};
     let interests=JSON.parse(localStorage.getItem("lawradar-interests")||"null")||defaults;
@@ -128,21 +129,102 @@
     const icon=(name)=>`<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
     function esc(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
     function showToast(message){const el=$("#toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2400)}
-    function renderStories(items,target){target.innerHTML=items.map(s=>`<article class="story" data-story="${s.id}"><div class="story-top"><span class="source-avatar">${icon("landmark")}</span><span class="source-name">${esc(s.kind)}</span><span class="story-time">· ${esc(s.time)}</span><span class="story-tag">${esc(s.tag)}</span></div>${s.hero?`<div class="story-hero"><span class="hero-label">LAW SIGNAL · ISSUE TRACKER</span><span class="hero-title">租屋議題進度追蹤</span><span class="hero-mark">${icon("landmark")}</span></div>`:""}<h2 class="story-title">${esc(s.title)}</h2><p class="story-summary">${esc(s.summary)}</p><div class="relevance"><b>為你推薦</b><span>${esc(s.reason)}</span></div><div class="story-meta"><span class="source-meta">${icon("link")}<span>${esc(s.source)}</span></span><span class="story-actions"><button class="text-action ${saved.has(s.id)?"saved":""}" data-save="${s.id}" aria-label="${saved.has(s.id)?"取消收藏":"收藏"}">${icon("bookmark")}${saved.has(s.id)?"已收藏":"收藏"}</button><button class="text-action" data-detail="${s.id}">查看詳情 ${icon("share")}</button></span></div></article>`).join("");}
-    function filteredStories(){let list=[...stories];if(activeFeed==="following")list=list.filter(s=>interests.topics.includes(s.category)||s.category==="學生打工");if(activeFeed==="latest")list.reverse();else if(activeFeed==="for-you")list.sort((a,b)=>b.score-a.score);if(refresh%2)list=list.slice(1).concat(list.slice(0,1));const q=$("#search-input").value.trim().toLowerCase();if(q)list=list.filter(s=>(s.title+s.summary+s.category+s.kind).toLowerCase().includes(q));return list}
-    function renderFeed(){renderStories(filteredStories(),$("#feed-list"));$("#feed-title").textContent=feedModes[activeFeed].title;$("#feed-subtitle").textContent=feedModes[activeFeed].subtitle}
+    function formatTime(item){
+      const t=LawRadarRanking.getTime(item);
+      if(t===null)return "日期未提供";
+      const d=new Date(t);
+      return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
+    }
+    function statusText(item){
+      const parts=[];
+      if(item.billStage)parts.push(BILL_STAGES[item.billStage]||item.billStage);
+      if(item.legalEffect)parts.push(LEGAL_EFFECTS[item.legalEffect]||item.legalEffect);
+      if(item.meetingStatus)parts.push("會議"+(MEETING_STATUS[item.meetingStatus]||item.meetingStatus));
+      if(item.sourceStatusText)parts.push(item.sourceStatusText);
+      return parts.length?parts.join("・"):"狀態未提供";
+    }
+    function currentProfile(){
+      return {topicTags:interests.topics,audienceTags:interests.identity};
+    }
+    function tagReasons(item){
+      const p=currentProfile();
+      const tags=item.topicTags.filter(t=>p.topicTags.includes(t)).concat(item.audienceTags.filter(t=>p.audienceTags.includes(t)));
+      return tags.length?["符合你追蹤的："+tags.join("、")]:[];
+    }
+    function renderStories(entries,target){
+      target.innerHTML=entries.map(entry=>{
+        const s=entry.item;
+        const reasons=(entry.reasons||[]).join("；");
+        const sourceName=esc(s.source.organization||"來源未提供");
+        const sourceHtml=s.source.url?`<a href="${esc(s.source.url)}" target="_blank" rel="noopener">${sourceName}</a>`:`${sourceName}（尚無官方連結）`;
+        return `<article class="story" data-story="${esc(s.id)}">
+          <div class="story-top"><span class="source-avatar">${icon("landmark")}</span><span class="source-name">${esc(RECORD_TYPES[s.recordType]||s.recordType)}</span><span class="story-time">· ${esc(formatTime(s))}</span><span class="story-tag">${esc(statusText(s))}</span></div>
+          ${LawRadarRanking.isUnverified(s)?`<span class="pending-badge">示意／待核：尚未完成官方來源核對</span>`:""}
+          <h2 class="story-title">${esc(s.title)}</h2>
+          <p class="story-summary">${esc(s.summary)}</p>
+          ${reasons?`<div class="relevance"><b>推薦理由</b><span>${esc(reasons)}</span></div>`:""}
+          <div class="story-meta"><span class="source-meta">${icon("link")}<span>${sourceHtml}</span></span><span class="story-actions"><button class="text-action ${saved.has(s.id)?"saved":""}" data-save="${esc(s.id)}">${icon("bookmark")}${saved.has(s.id)?"已收藏":"收藏"}</button><button class="text-action" data-detail="${esc(s.id)}">查看詳情 ${icon("share")}</button></span></div>
+        </article>`;
+      }).join("");
+    }
+    function getFeedEntries(){
+      const profile=currentProfile();
+      let entries;
+      if(activeFeed==="for-you"){
+        entries=LawRadarRanking.rankNewsItems(newsItems,profile,new Date());
+      }else if(activeFeed==="following"){
+        entries=LawRadarRanking.followingNewsItems(newsItems,profile).map(item=>({item,reasons:tagReasons(item)}));
+      }else{
+        entries=LawRadarRanking.latestNewsItems(newsItems).map(item=>({item,reasons:[]}));
+      }
+      const q=$("#search-input").value;
+      return entries.filter(e=>LawRadarRanking.matchesQuery(e.item,q));
+    }
+    function renderFeed(){
+      const entries=getFeedEntries();
+      const target=$("#feed-list");
+      const q=$("#search-input").value.trim();
+      if(entries.length>0){
+        renderStories(entries,target);
+      }else if(q){
+        target.innerHTML=`<div class="saved-empty">${icon("search")}<strong>找不到符合「${esc(q)}」的法訊</strong><p>試試其他關鍵字，或清除搜尋。</p><button class="outline-button empty-action" data-clear-search>清除搜尋</button></div>`;
+      }else if(activeFeed==="following"){
+        target.innerHTML=`<div class="saved-empty">${icon("bookmark")}<strong>目前沒有符合你追蹤標籤的法訊</strong><p>新增關注的議題或身分後，相關內容會出現在這裡。</p><button class="outline-button empty-action" data-open-interests>編輯關注</button></div>`;
+      }else{
+        target.innerHTML=`<div class="saved-empty">${icon("info")}<strong>目前沒有法訊資料</strong><p>資料尚未載入。</p></div>`;
+      }
+      $("#feed-title").textContent=feedModes[activeFeed].title;
+      $("#feed-subtitle").textContent=feedModes[activeFeed].subtitle;
+    }
+
+    
     function updateSavedCount(){const badge=$(".saved-count");badge.hidden=!saved.size;badge.textContent=saved.size;localStorage.setItem("lawradar-saved",JSON.stringify([...saved]))}
-    function renderSaved(){const target=$("#saved-list"),items=stories.filter(s=>saved.has(s.id));if(!items.length){target.innerHTML=`<div class="saved-empty">${icon("bookmark")}<strong>還沒有收藏法訊</strong><p>在首頁點選「收藏」，重要內容就會留在這裡。</p></div>`;return}renderStories(items,target)}
+    function renderSaved(){
+      const target=$("#saved-list"),items=newsItems.filter(s=>saved.has(s.id));
+      if(!items.length){target.innerHTML=`<div class="saved-empty">${icon("bookmark")}<strong>還沒有收藏法訊</strong><p>在首頁點選「收藏」，重要內容就會留在這裡。</p></div>`;return}
+      renderStories(items.map(item=>({item,reasons:[]})),target);
+    }
     function updateInterests(){const all=[...interests.identity,...interests.topics];$("#identity-row").innerHTML=all.map(t=>`<span class="pill">${esc(t)}</span>`).join("")+`<button class="pill add" data-open-interests><span>＋</span> 編輯關注</button>`;$("#settings-tags").innerHTML=all.map(t=>`<span class="pill">${esc(t)}</span>`).join("");$("#sidebar-topics").innerHTML=(interests.topics.length?interests.topics:["尚未選擇議題"]).slice(0,4).map(t=>`<div class="topic-shortcut"><span class="topic-color"></span>${esc(t)}</div>`).join("");$("#rail-notify-chips").innerHTML=(interests.topics.length?interests.topics:["尚未選擇議題"]).slice(0,3).map(t=>`<span class="notify-chip">${esc(t)}</span>`).join("");localStorage.setItem("lawradar-interests",JSON.stringify(interests));renderFeed()}
     function renderLine(){const status=$("#rail-line-status"),button=$("#rail-line-button"),setting=$("#line-status-text");status.innerHTML=`<span class="status-dot" style="${lineConnected?"background:#5da66e":"background:#d8a85b"}"></span>${lineConnected?"LINE 官方帳號已連結（示意）":"準備連結你的 LINE"}`;button.textContent=lineConnected?"管理 LINE 通知偏好":"連結 LINE 官方帳號";setting.textContent=lineConnected?"LINE 官方帳號已連結（示意）":"尚未連結 LINE 帳號";$("#connect-line").textContent=lineConnected?"解除連結（示意）":"連結 LINE（示意）"}
     function showView(name){const view=$("#view-"+name);if(!view)return;$$(".view").forEach(v=>v.classList.toggle("active",v===view));$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===name));if(name==="saved")renderSaved();window.scrollTo({top:0,behavior:"smooth"})}
     function openInterestModal(){const modal=$("#interest-modal");$$(".option-chip",modal).forEach(b=>{const arr=b.closest("[data-group]").dataset.group==="identity"?interests.identity:interests.topics;b.classList.toggle("selected",arr.includes(b.textContent.trim()))});modal.classList.add("open")}
     function toggleLine(){lineConnected=!lineConnected;localStorage.setItem("lawradar-line",lineConnected?"yes":"no");renderLine();showToast(lineConnected?"已切換為 LINE 已連結示意狀態":"已切換為尚未連結示意狀態")}
-    function openDetails(id){detailStory=stories.find(s=>s.id===id);if(!detailStory)return;$("#detail-title").textContent=detailStory.title;$("#detail-desc").textContent=detailStory.summary;$("#detail-source").innerHTML=`<b>推薦原因：</b>${esc(detailStory.reason)}<br><b>資料來源：</b>${esc(detailStory.source)}<br><b>更新時間：</b>${esc(detailStory.time)}<br><br>正式版會連結至原始官方紀錄，並顯示資料更新時間。這裡的議題與狀態文字皆為原型示意。`;$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";$("#detail-modal").classList.add("open")}
+    function openDetails(id){
+      const item=newsItems.find(s=>s.id===id);
+      if(!item)return;
+      detailStory=item;
+      const src=item.source;
+      $("#detail-title").textContent=item.title;
+      $("#detail-desc").textContent=item.summary;
+      $("#detail-source").innerHTML=`<b>資料類型：</b>${esc(RECORD_TYPES[item.recordType]||item.recordType)}<br><b>狀態：</b>${esc(statusText(item))}<br><b>資料時間：</b>${esc(formatTime(item))}<br><b>資料來源：</b>${esc(src.organization||"未提供")}${src.url?`（<a href="${esc(src.url)}" target="_blank" rel="noopener">開啟官方來源</a>）`:"（尚無官方連結）"}<br><b>核對狀態：</b>${LawRadarRanking.isUnverified(item)?"示意／待核，不可當作已核實法訊":"已核對"}`;
+      $("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";
+      $("#detail-modal").classList.add("open");
+    }
     function sendChat(text){const log=$("#chat-log"),q=text.trim();if(!q)return;const user=document.createElement("div");user.className="chat-message";user.textContent=q;log.append(user);const answer=document.createElement("div");answer.className="chat-answer";const known=q.includes("來源")||q.includes("依據");answer.innerHTML=known?"正式版預計優先引用立法院議事資料、全國法規資料庫及主管機關公告，並附上原始連結與資料日期。這個原型沒有連接資料庫，因此目前不能提供已核實的法規答案。<span class=\"answer-source\">來源策略示意｜正式版需顯示實際文件名稱、發布機關、日期與連結</span>":"我目前沒有連接官方法規或議事資料，無法核實這個議題的實際規定或最新進度。為了避免提供錯誤答案，這裡先不推測。正式版會先查找官方來源，再附上文件、條文或會議紀錄；若找不到可靠依據，會明確說明無法確認。<span class=\"answer-source\">目前狀態：尚未查詢官方資料｜回答示意，不是法律意見</span>";log.append(answer);$("#chat-input").value="";log.scrollTop=log.scrollHeight}
     document.addEventListener("click",e=>{const nav=e.target.closest("[data-view]");if(nav){showView(nav.dataset.view);return}const open=e.target.closest("[data-open-interests]");if(open){openInterestModal();return}const close=e.target.closest("[data-close-modal]");if(close){e.target.closest(".modal-backdrop").classList.remove("open");return}const option=e.target.closest(".option-chip");if(option){option.classList.toggle("selected");return}const save=e.target.closest("[data-save]");if(save){const id=save.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);updateSavedCount();renderFeed();renderSaved();if(detailStory?.id===id)$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";showToast(saved.has(id)?"已加入收藏":"已取消收藏");return}const detail=e.target.closest("[data-detail]");if(detail){openDetails(detail.dataset.detail);return}const tab=e.target.closest("[data-feed]");if(tab){activeFeed=tab.dataset.feed;refresh=0;$$("[data-feed]").forEach(b=>{b.classList.toggle("selected",b===tab);b.setAttribute("aria-selected",String(b===tab))});renderFeed();return}const prompt=e.target.closest(".prompt-chip");if(prompt){sendChat(prompt.textContent);return}});
     $("#save-interests").addEventListener("click",()=>{const modal=$("#interest-modal");interests={identity:$$('[data-group="identity"] .option-chip.selected',modal).map(b=>b.textContent.trim()),topics:$$('[data-group="topics"] .option-chip.selected',modal).map(b=>b.textContent.trim())};updateInterests();modal.classList.remove("open");showToast("關注設定已儲存")});
-    $("#refresh-feed").addEventListener("click",()=>{refresh++;renderFeed();showToast("已依你的關注更新推薦")});
+    $("#refresh-feed").addEventListener("click",()=>{renderFeed();showToast("已重新整理")});
+    document.addEventListener("click",e=>{if(e.target.closest("[data-clear-search]")){$("#search-input").value="";renderFeed()}});
     $("#search-input").addEventListener("input",()=>{if(!$("#view-home").classList.contains("active"))showView("home");renderFeed()});
     $("#rail-line-button").addEventListener("click",()=>lineConnected?showView("settings"):toggleLine());$("#connect-line").addEventListener("click",toggleLine);
     $("#detail-save").addEventListener("click",()=>{if(!detailStory)return;const id=detailStory.id;saved.has(id)?saved.delete(id):saved.add(id);updateSavedCount();renderFeed();renderSaved();$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";showToast(saved.has(id)?"已加入收藏":"已取消收藏")});
