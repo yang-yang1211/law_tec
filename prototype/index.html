@@ -230,6 +230,7 @@
     document.addEventListener("click",e=>{if(e.target.closest("[data-clear-search]")){$("#search-input").value="";$("#mobile-search-input").value="";renderFeed()}});
     $("#mobile-search-input").addEventListener("input",e=>{$("#search-input").value=e.target.value;renderFeed()});
     $("#search-input").addEventListener("input",e=>{$("#mobile-search-input").value=e.target.value});
+    $("#search-input").addEventListener("input",()=>{if(!$("#view-home").classList.contains("active"))showView("home");renderFeed()});
     $("#rail-line-button").addEventListener("click",()=>lineConnected?showView("settings"):toggleLine());$("#connect-line").addEventListener("click",toggleLine);
     $("#detail-save").addEventListener("click",()=>{if(!detailStory)return;const id=detailStory.id;saved.has(id)?saved.delete(id):saved.add(id);updateSavedCount();renderFeed();renderSaved();$("#detail-save").textContent=saved.has(id)?"取消收藏":"收藏這則法訊";showToast(saved.has(id)?"已加入收藏":"已取消收藏")});
     $("#chat-form").addEventListener("submit",e=>{e.preventDefault();sendChat($("#chat-input").value)});
