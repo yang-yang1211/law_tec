@@ -9,15 +9,15 @@
 
 ## 工作邊界與輸入
 
-- 使用 A 維護的資料契約 v1.0.0 和唯一共用 fixture `data/fixtures/news-items.v1.json`。
+- 使用 A 維護的資料契約 v1.0.1 和唯一共用 fixture `data/fixtures/news-items.v1.json`。
 - 使用立法院、全國法規資料庫等可回查的官方來源；狀態不明、日期缺漏或來源衝突時保留未知並標待核。
 - C 負責來源和法律／議事狀態正確性及問答依據；B 負責首頁排序，D 負責 LINE 連結和通知。
 
 ## Issue #3：資料整理與來源核對
 
 1. 在共用 fixture 維護至少 6 筆租屋或勞動議題 NewsItem。
-2. 每筆填官方來源 URL、文件名稱、發布／更新時間、查核時間、引用定位和支持摘要的原文摘錄。
-3. 只有逐筆核對完成、來源可回查時才設 `verificationStatus=verified`；未知狀態不得靠標題或摘要推測。
+2. 每筆填官方來源 URL、文件名稱、發布／更新時間、查核時間、引用定位和支持摘要的原文摘錄；來源只有日期時使用 source.publishedDate。
+3. 只有逐筆核對完成、來源可回查時才設 verificationStatus=verified；C 也要核對自動建議的 recordType、topicTags、audienceTags 和首頁短標題。未知狀態不得靠標題或摘要推測。
 4. 在 `docs/來源查核紀錄.md` 記錄資料集名稱、更新頻率／限制、每筆核對結果和未解問題。
 5. 請 E 抽查至少 2 筆；由 C 處理錯誤並在 #3 記錄更正依據。
 

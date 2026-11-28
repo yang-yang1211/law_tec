@@ -1,13 +1,18 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.0.1",
   "items": [
     {
       "id": "demo-rent-001",
       "recordType": "bill",
       "title": "示意法訊：租屋相關提案（虛構）",
       "summary": "此筆僅測試欄位呈現，不代表真實提案或法律資訊。",
-      "topicTags": ["租屋權益"],
-      "audienceTags": ["租屋族", "學生"],
+      "topicTags": [
+        "租屋權益"
+      ],
+      "audienceTags": [
+        "租屋族",
+        "學生"
+      ],
       "billStage": "unknown",
       "legalEffect": "unknown",
       "sourceStatusText": null,
@@ -21,14 +26,179 @@
         "url": null,
         "publishedAt": null,
         "accessedAt": null,
-        "citationLocator": null
+        "citationLocator": null,
+        "publishedDate": null
       },
       "sourceExcerpt": null,
       "verificationStatus": "pending",
       "verifiedAt": null,
       "verifiedBy": null,
       "notificationLevel": "none"
+    },
+    {
+      "id": "law-tw-land-act-art-099-deposit-cap",
+      "recordType": "regulation",
+      "title": "土地法",
+      "summary": "房屋租賃押租金不得超過二個月租金；若已收超過，承租人得以超額部分抵付房租。",
+      "topicTags": [
+        "租屋權益"
+      ],
+      "audienceTags": [
+        "租屋族"
+      ],
+      "billStage": null,
+      "legalEffect": "effective",
+      "sourceStatusText": null,
+      "meetingStatus": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "meetingDate": null,
+      "source": {
+        "accessedAt": "2026-11-23T01:49:38+08:00",
+        "organization": "法務部全國法規資料庫",
+        "citationLocator": "全法修正日期 2024-08-07（非第99條個別修正日期）；第99條第1、2項",
+        "publishedAt": null,
+        "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0060001",
+        "documentTitle": "土地法",
+        "publishedDate": "2024-08-07"
+      },
+      "sourceExcerpt": "押租金不得超過兩個月房租；超額部分得抵付房租。",
+      "verificationStatus": "needs_review",
+      "verifiedAt": null,
+      "verifiedBy": null,
+      "notificationLevel": "none"
+    },
+    {
+      "id": "law-tw-civil-code-art-429-430-repairs",
+      "recordType": "regulation",
+      "title": "民法",
+      "summary": "除租約另有約定或另有習慣外，租賃物修繕原則由出租人負擔。若屬出租人負責的修繕，承租人應先定相當期限催告；逾期未修繕時，得終止契約或自行修繕並請求償還費用，或從租金扣除。",
+      "topicTags": [
+        "租屋權益"
+      ],
+      "audienceTags": [
+        "租屋族"
+      ],
+      "billStage": null,
+      "legalEffect": "effective",
+      "sourceStatusText": null,
+      "meetingStatus": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "meetingDate": null,
+      "source": {
+        "accessedAt": "2026-11-23T01:49:38+08:00",
+        "organization": "法務部全國法規資料庫",
+        "citationLocator": "全法修正日期 2026-08-17（非第429、430條個別修正日期）；第429、430條",
+        "publishedAt": null,
+        "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=B0000001",
+        "documentTitle": "民法",
+        "publishedDate": "2026-08-17"
+      },
+      "sourceExcerpt": "第429條分配修繕責任；第430條規定催告後仍未修繕時，承租人可終止或自修後請款／扣租。",
+      "verificationStatus": "needs_review",
+      "verifiedAt": null,
+      "verifiedBy": null,
+      "notificationLevel": "none"
+    },
+    {
+      "id": "law-tw-residential-lease-no-rent-subsidy-ban",
+      "recordType": "regulation",
+      "title": "內政部公告：修正「住宅租賃定型化契約應記載及不得記載事項」不得記載事項第10點規定，自即日生效",
+      "summary": "住宅租賃定型化契約不得約定承租人不得申請租金補貼；出租人不得以明文條款禁止或以不當約款限制承租人提出申請。此修正自2023-06-14公告生效。",
+      "topicTags": [
+        "租屋權益"
+      ],
+      "audienceTags": [
+        "租屋族"
+      ],
+      "billStage": null,
+      "legalEffect": "effective",
+      "sourceStatusText": "2023-06-14公告修正，自公告日起生效",
+      "meetingStatus": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "meetingDate": null,
+      "source": {
+        "accessedAt": "2026-11-23T01:49:38+08:00",
+        "organization": "行政院公報資訊網（內政部公告）",
+        "citationLocator": "內政部2023-06-14公告；不得記載事項第10點",
+        "publishedAt": null,
+        "url": "https://gazette.nat.gov.tw/EG_FileManager/eguploadpub/eg029110/ch02/type1/gov10/num1/Eg.htm",
+        "documentTitle": "住宅租賃定型化契約應記載及不得記載事項第十點修正規定",
+        "publishedDate": "2023-06-14"
+      },
+      "sourceExcerpt": "標準住宅租約不得記載承租人不得申請租金補貼。",
+      "verificationStatus": "needs_review",
+      "verifiedAt": null,
+      "verifiedBy": null,
+      "notificationLevel": "none"
+    },
+    {
+      "id": "benefit-tw-rent-subsidy-115",
+      "recordType": "official_notice",
+      "title": "115年度300億元中央擴大租金補貼專案",
+      "summary": "符合本年度計畫資格（包括無自有住宅及所得等條件）的租屋家庭，可依居住縣市、家庭級別及身分申領，每戶每月補助新臺幣2,000至8,000元。115年度（2026）受理期間為2026-01-01至2026-12-31；各地金額與資格以本年度官方公告及審查結果為準。",
+      "topicTags": [
+        "租屋權益"
+      ],
+      "audienceTags": [
+        "租屋族"
+      ],
+      "billStage": null,
+      "legalEffect": null,
+      "sourceStatusText": "計畫公告日：2025-09-16；115年度受理期間：2026-01-01至2026-12-31",
+      "meetingStatus": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "meetingDate": null,
+      "source": {
+        "accessedAt": "2026-11-23T01:49:38+08:00",
+        "organization": "內政部國土管理署",
+        "citationLocator": "國署住字第1141175326號公告（2025-09-16）；申請期間及補助額度附表四、五",
+        "publishedAt": null,
+        "url": "https://www.nlma.gov.tw/ch/legislation/regsearch/7243",
+        "documentTitle": "公告115年300億元中央擴大租金補貼專案計畫租金補貼受理申請",
+        "publishedDate": "2025-09-16"
+      },
+      "sourceExcerpt": "115年度受理至2026-12-31；每戶每月依級別與縣市補助2,000至8,000元。",
+      "verificationStatus": "needs_review",
+      "verifiedAt": null,
+      "verifiedBy": null,
+      "notificationLevel": "none"
+    },
+    {
+      "id": "benefit-tw-rent-tax-deduction",
+      "recordType": "regulation",
+      "title": "房屋租金支出特別扣除額的適用條件為何？",
+      "summary": "本人、配偶及受扶養直系親屬在國內無房屋，租屋自住且非供營業或執業使用者，可就實付租金扣除政府補助後申報特別扣除額，每戶每年上限新臺幣180,000元。適用20%以上稅率、股利採28%分開計稅，或基本所得額超過新臺幣750萬元者不適用；申報時應依該年度規定備妥租約與付款證明。",
+      "topicTags": [
+        "租屋權益"
+      ],
+      "audienceTags": [
+        "租屋族"
+      ],
+      "billStage": null,
+      "legalEffect": "effective",
+      "sourceStatusText": "頁面發布日期：2026-04-22；排除條件依申報年度核對",
+      "meetingStatus": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "meetingDate": null,
+      "source": {
+        "accessedAt": "2026-11-23T01:49:38+08:00",
+        "organization": "財政部南區國稅局",
+        "citationLocator": "財政部頁面發布日期 2026-04-22；適用條件與所得稅法第17條",
+        "publishedAt": null,
+        "url": "https://www.mof.gov.tw/singlehtml/979b54e408fb499eae3c1d9efe978868?cntId=d67400c3446e439eb51af85d08491385",
+        "documentTitle": "房屋租金支出特別扣除額的適用條件為何？",
+        "publishedDate": "2026-04-22"
+      },
+      "sourceExcerpt": "每申報戶按實付租金扣除政府補助後計算，年扣除上限為180,000元，另有所得與稅率排除條件。",
+      "verificationStatus": "needs_review",
+      "verifiedAt": null,
+      "verifiedBy": null,
+      "notificationLevel": "none"
     }
   ]
 }
-

@@ -29,7 +29,7 @@
 
 ## 共用資料契約
 
-跨模組使用 [NewsItem 資料契約 v1.0.0](資料契約.md)，唯一共用 fixture 為 `data/fixtures/news-items.v1.json`。B、C、D 不另建不同欄位的資料副本；新增欄位先在 Issue 提出並由 A 確認。只有已核對且來源可回查的資料可用於法律事實問答或實際 LINE 推播。
+跨模組使用 [NewsItem 資料契約 v1.0.1](資料契約.md)，唯一共用 fixture 為 `data/fixtures/news-items.v1.json`。B、C、D 不另建不同欄位的資料副本；新增欄位先在 Issue 提出並由 A 確認。來源篩選、類型與標籤建議及首頁投遞流程依[自動收集與首頁投遞規格](資料收集與首頁投遞規格.md)處理。正式首頁 feed、法律事實問答與實際 LINE 通知只使用已核對且來源可回查的資料。
 
 ## 分支、PR 與 Review
 

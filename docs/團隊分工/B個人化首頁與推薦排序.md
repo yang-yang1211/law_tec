@@ -9,7 +9,7 @@
 ## 輸入
 
 - 使用者偏好：`topicTags`、`audienceTags`。
-- 法訊：資料契約 v1.0.0 的 `NewsItem[]`；正式資料讀取 `data/fixtures/news-items.v1.json`。
+- 法訊：資料契約 v1.0.1 的 `NewsItem[]`；正式資料讀取 `data/fixtures/news-items.v1.json`。
 - C 尚未提供核對資料時，可在 B 自己的分支使用標示「示意／待核」的測試資料；不得把虛構資料放進共用 fixture 當真實法訊。
 
 ## 實際待辦
@@ -17,7 +17,7 @@
 1. 在 `prototype/recommendation.js` 實作 `rankNewsItems(items, profile, now)`，回傳排序項目、分數和命中的推薦理由；相同輸入必須得到相同結果。
 2. 在 `prototype/index.html` 接上排序函式，完成「為你推薦」、「我追蹤的」、「最新消息」三個檢視。
 3. 在 `docs/推薦排序規則.md` 寫公式、至少三筆分數例子和已知限制。
-4. 卡片顯示標題、摘要、來源名稱／連結、資料時間、來源／法案狀態和推薦理由。
+4. 卡片優先顯示 FeedCard.feedTitle；缺值時回退正式 NewsItem.title。卡片保留摘要、來源名稱／連結、資料時間、來源／法案狀態和推薦理由。
 5. 搜尋目前檢視的標題、摘要及標籤；為搜尋無結果和沒有追蹤內容提供空狀態。
 6. PR 附啟動方式、畫面截圖和至少兩個驗收情境的實際結果。
 
@@ -37,6 +37,10 @@
 - **我追蹤的：**只留議題或身分標籤至少命中一項的內容，再依有效更新時間排序。
 - **最新消息：**不做個人化分數，按有效更新時間排序；沒有日期的排最後。
 - `verificationStatus=pending` 或 `source.url` 為空時，清楚標示「示意／待核」，不可顯示成已核實法訊。
+
+## 自動資料流程交接
+
+B 只把 C 核對完成的 NewsItem 轉成首頁 FeedCard，不負責來源判定或法律核對。正式首頁排除 needs_review；測試預覽需明確標示待核。依使用者 topicTags／audienceTags 交集產生 matchedTags 和推薦理由，不把使用者 ID 寫回共用資料。
 
 ## 主要交付檔案
 
